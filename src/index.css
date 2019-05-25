@@ -95,6 +95,7 @@ button {
 .navbar-logo {
   height: 100%;
   width: 40%;
+  min-width: 200px;
 }
 
 .navbar-logout {
@@ -104,4 +105,59 @@ button {
 
 .navbar-logout p {
   float: right;
+}
+
+.left-part {
+  position: fixed;
+  top: 100px;
+  height: calc(100% - 100px);
+  background-color: #67809f;
+  width: 300px;
+  justify-content: flex-start;
+}
+
+.leftpart-menu {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #67809f;
+  color: white;
+}
+
+.leftpart-menu:hover {
+  background-color: #34495e;
+}
+.leftpart-menu:active {
+  background-color: #34495e;
+}
+
+.circle {
+  margin-top: 10px;
+  width: 150px;
+  background-color: #fff;
+  height: 150px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.circle p{
+  font-size: 400%;
+  color: #67809f;
+}
+
+.view {
+  position: fixed;
+  top: 100px;
+  left: 300px;
+}
+
+.link-p {
+  text-decoration: none;
+  color: white;
 }
