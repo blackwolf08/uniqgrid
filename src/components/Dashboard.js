@@ -16,7 +16,7 @@ export default class Dashboard extends Component {
                 <LeftPart />
                 <div className="view">
                 <Switch>
-                    <Route path="/dashboard" component={MySite} />
+                    <Route path="/dashboard" exact component={MySite} />
                     <Route path="/dashboard/my-device" component={MyDevice} />
                     <Route path="/dashboard/my-requests" component={MyRequests} />
                     <Route path="/dashboard/feedback" component={FeedBack} />
