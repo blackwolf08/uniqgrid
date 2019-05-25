@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Spinner from "../images/index";
 import { connect } from "react-redux";
+import logo from "../images/logo.png";
 
 class AuthLogin extends Component {
   state = {
@@ -58,17 +59,33 @@ class AuthLogin extends Component {
       return <Spinner />;
     }
 
-    return <div className="flex h-w-100" style={styles.root} />;
+    return (
+      <div className="flex h-w-100 auth-root">
+        <div className="auth-container flex flex-col">
+          <img src={logo} alt="uniqgrid" className="auth-logo" />
+          <form onSubmit={this.handleSubmit} className="auth-form flex flex-col">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={this.handleChange}
+              className="auth-input"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={this.handleChange}
+              className="auth-input"
+            />
+            <button className="auth-button">Login</button>
+            <p className="auth-p">Forgot Password?</p>
+          </form>
+        </div>
+      </div>
+    );
   }
 }
-
-const styles = {
-  root: {},
-  logo: {},
-  button: {},
-
-  link: {}
-};
 
 const mapStateToProps = state => ({
   error: state.error.err
