@@ -101,6 +101,7 @@ button {
 .navbar-logout {
   padding-right: 20px;
   width: 50%;
+  cursor: pointer;
 }
 
 .navbar-logout p {
@@ -160,4 +161,5 @@ button {
 .link-p {
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
