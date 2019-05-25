@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -10,7 +10,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -47,15 +47,16 @@ button {
 .auth-container {
   background-color: #fff;
   box-shadow: 0 0 2px gray;
-  height: 400px;
-  width: 500px;
+  height: 60%;
+  width: 70%;
+  max-width: 400px;
   position: relative;
 }
 
 .auth-logo {
   position: absolute;
   top: 0;
-   height: 50px;
+  height: 50px;
 }
 
 .auth-form {
@@ -68,22 +69,18 @@ button {
   background-color: #f1f1f1;
   width: 90%;
   margin-bottom: 10px;
-  font-size: 50%;
   padding: 5px;
 }
-
 
 .auth-button {
   width: 90%;
   background-color: #111111;
   color: white;
   padding: 10px 5px;
-  font-size: 50%;
   box-shadow: 1px 1px 5px gray;
 }
 
 .auth-p {
-  font-size: 50%;
   width: 100%;
   text-align: end;
   margin-top: 10px;
