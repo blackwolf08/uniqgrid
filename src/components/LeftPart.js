@@ -9,7 +9,7 @@ export default class LeftPart extends Component {
           <p>FL</p>
         </div>
         <button className="leftpart-menu">
-          <Link  style={{width:'100%'}} className="link-p" to="/dashboard/my-site">
+          <Link  style={{width:'100%'}} className="link-p" to="/dashboard">
             My Site
           </Link>
         </button>
