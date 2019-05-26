@@ -67,7 +67,7 @@ export default class MySite extends Component {
     const list = this.state.connections.map(connection => {
       return (
           <>
-            <Connection key={connection.id} name={connection.name} power={connection.power} powerPer={connection.powerPer} consumption={connection.consumption} consumptionPer={connection.consumptionPer}  />
+            <Connection id={connection.id} key={connection.id} name={connection.name} power={connection.power} powerPer={connection.powerPer} consumption={connection.consumption} consumptionPer={connection.consumptionPer}  />
           </>
       )
     });

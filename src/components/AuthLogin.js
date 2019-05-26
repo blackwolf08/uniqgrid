@@ -28,7 +28,7 @@ class AuthLogin extends Component {
           email: "",
           password: ""
         });
-        this.props.history.push("/dashboard");
+        this.props.history.push("/dashboard/my-sites");
       })
       .catch(() => {
         return;
