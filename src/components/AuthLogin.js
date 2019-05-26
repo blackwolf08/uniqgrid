@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../images/index";
 import { connect } from "react-redux";
 import logo from "../images/logo.png";
+import { Helmet } from "react-helmet";
 
 class AuthLogin extends Component {
   state = {
@@ -61,9 +62,15 @@ class AuthLogin extends Component {
 
     return (
       <div className="flex h-w-100 auth-root">
+        <Helmet>
+          <title>Uniqgrid | Login</title>
+        </Helmet>
         <div className="auth-container flex flex-col">
           <img src={logo} alt="uniqgrid" className="auth-logo" />
-          <form onSubmit={this.handleSubmit} className="auth-form flex flex-col">
+          <form
+            onSubmit={this.handleSubmit}
+            className="auth-form flex flex-col"
+          >
             <input
               type="text"
               name="email"

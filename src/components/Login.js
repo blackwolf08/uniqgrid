@@ -15,10 +15,7 @@ class Login extends Component {
           path="/login"
           render={props => <AuthLogin signin onAuth={authUser} {...props} />}
         />
-        <Route 
-          path="/dashboard"
-          component={withAuth(Dashboard)}
-        />
+        <Route path="/dashboard" component={withAuth(Dashboard)} />
       </Switch>
     );
   }

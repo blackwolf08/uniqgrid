@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import logo from "../images/logo.png";
-import { logout } from '../actions/auth';
+import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 
 class NavBar extends Component {
   state = {};
 
-  logout = (e) => {
+  logout = e => {
     e.preventDefault();
     this.props.logout();
-    
   };
   render() {
     return (
@@ -35,9 +34,12 @@ const style = {
   }
 };
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
   isLoading: state.fetch.isLoading,
   currentUser: state.currentUser
-})
+});
 
-export default connect(mapStateToProps, { logout })(NavBar);
+export default connect(
+  mapStateToProps,
+  { logout }
+)(NavBar);

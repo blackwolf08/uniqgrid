@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Connection from './Connection';
+import Connection from "./Connection";
+import { Helmet } from "react-helmet";
 
 export default class MySite extends Component {
   state = {
@@ -64,20 +65,30 @@ export default class MySite extends Component {
   };
 
   render() {
+    document.title = "My Site";
     const list = this.state.connections.map(connection => {
       return (
-          <>
-            <Connection id={connection.id} key={connection.id} name={connection.name} power={connection.power} powerPer={connection.powerPer} consumption={connection.consumption} consumptionPer={connection.consumptionPer}  />
-          </>
-      )
+        <div>
+          <Connection
+            id={connection.id}
+            key={connection.id}
+            name={connection.name}
+            power={connection.power}
+            powerPer={connection.powerPer}
+            consumption={connection.consumption}
+            consumptionPer={connection.consumptionPer}
+          />
+        </div>
+      );
     });
 
     return (
       <div className="mysites-root">
+        <Helmet>
+          <title>My Site</title>
+        </Helmet>
         <h1 className="mysites-heading">My Sites</h1>
-        <div className="mysites-connection-list">
-            {list}
-        </div>
+        <div className="mysites-connection-list">{list}</div>
       </div>
     );
   }

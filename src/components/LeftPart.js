@@ -9,27 +9,47 @@ export default class LeftPart extends Component {
           <p>FL</p>
         </div>
         <button className="leftpart-menu">
-          <Link  style={{width:'100%', height:'100%'}} className="link-p" to="/dashboard/my-sites">
+          <Link
+            style={{ width: "100%", height: "100%" }}
+            className="link-p"
+            to="/dashboard/my-sites"
+          >
             My Site
           </Link>
         </button>
         <button className="leftpart-menu">
-          <Link style={{width:'100%', height:'100%'}} className="link-p" to="/dashboard/my-device">
+          <Link
+            style={{ width: "100%", height: "100%" }}
+            className="link-p"
+            to="/dashboard/my-device"
+          >
             My Device
           </Link>
         </button>
         <button className="leftpart-menu">
-          <Link style={{width:'100%', height:'100%'}} className="link-p" to="/dashboard/my-requests">
+          <Link
+            style={{ width: "100%", height: "100%" }}
+            className="link-p"
+            to="/dashboard/my-requests"
+          >
             My Requests
           </Link>
         </button>
         <button className="leftpart-menu">
-          <Link style={{width:'100%', height:'100%'}} className="link-p" to="/dashboard/feedback">
+          <Link
+            style={{ width: "100%", height: "100%" }}
+            className="link-p"
+            to="/dashboard/feedback"
+          >
             FeedBack
           </Link>
         </button>
         <button className="leftpart-menu">
-          <Link style={{width:'100%', height:'100%'}} className="link-p" to="/dashboard/my-profile">
+          <Link
+            style={{ width: "100%", height: "100%" }}
+            className="link-p"
+            to="/dashboard/my-profile"
+          >
             My Profile
           </Link>
         </button>

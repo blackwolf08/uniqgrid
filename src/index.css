@@ -147,7 +147,7 @@ button {
   position: relative;
 }
 
-.circle p{
+.circle p {
   font-size: 400%;
   color: #67809f;
 }
@@ -174,9 +174,7 @@ button {
   cursor: pointer;
 }
 
-
 .mysites-root {
-
 }
 
 .mysites-heading {
@@ -199,7 +197,7 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
-  .left-part{
+  .left-part {
     display: none;
   }
   .view {
