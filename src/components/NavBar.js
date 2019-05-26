@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import logo from "../images/logo.png";
+import { logout } from '../actions/auth';
+import { connect } from "react-redux";
 
-export default class NavBar extends Component {
+class NavBar extends Component {
   state = {};
 
-  logout = () => {
-    localStorage.clear();
-    window.location.href = "/login";
+  logout = (e) => {
+    e.preventDefault();
+    this.props.logout();
+    
   };
   render() {
     return (
@@ -31,3 +34,10 @@ const style = {
     top: 0
   }
 };
+
+const mapStateToProps = state =>({
+  isLoading: state.fetch.isLoading,
+  currentUser: state.currentUser
+})
+
+export default connect(mapStateToProps, { logout })(NavBar);
