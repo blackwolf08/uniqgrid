@@ -86,6 +86,8 @@ export default class FeedBack extends Component {
     this.setState({
       isSubmitted: !this.state.isSubmitted
     });
+
+    //handle API calls here for feedback backend, then set state to static and dont allow for another rating!!
   };
 
   render() {
