@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import Connection from "./Connection";
 import { Helmet } from "react-helmet";
-import uuid from "uuid";
 
 export default class MySite extends Component {
   state = {
     connections: [
       {
-        _id_: uuid.v4(),
+        _id_: 1,
         name: "Connection name 1",
         power: "100 kW",
         powerPer: "55%",
@@ -15,7 +14,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 2,
         name: "Connection name 2",
         power: "100 kW",
         powerPer: "55%",
@@ -23,7 +22,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 3,
         name: "Connection name 3",
         power: "100 kW",
         powerPer: "55%",
@@ -31,7 +30,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 4,
         name: "Connection name 4",
         power: "100 kW",
         powerPer: "55%",
@@ -39,7 +38,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 5,
         name: "Connection name 5",
         power: "100 kW",
         powerPer: "55%",
@@ -47,7 +46,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 6,
         name: "Connection name 6",
         power: "100 kW",
         powerPer: "55%",
@@ -55,7 +54,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        _id_: uuid.v4(),
+        _id_: 7,
         name: "Connection name 7",
         power: "100 kW",
         powerPer: "55%",
