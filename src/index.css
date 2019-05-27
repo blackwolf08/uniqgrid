@@ -317,6 +317,38 @@ h4 {
   border-bottom: 2px solid #67809f;
 }
 
+.installed-devices, .address-details, .connection-details, .local-generation, .solar-pv-generator {
+  padding: 50px;
+}
+
+.installed-devices {
+  display: flex;
+  flex-direction: column;
+}
+
+.installed-device-buttons {
+  padding: 10px;
+  margin: 10px;
+  width: 120px;
+  border-radius: 20px;
+}
+
+.solar-pv-generator-box{
+  display: flex;
+}
+
+.solar-pv-generator-heading{
+  font-weight: 600;
+}
+
+i {
+  color: grey;
+}
+.solar-pv-generator-box-right{
+  padding-left: 30px;
+  padding-top: 15px;
+}
+
 @media only screen and (max-width: 600px) {
   .left-part {
     display: none;
