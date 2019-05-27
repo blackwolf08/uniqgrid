@@ -148,6 +148,7 @@ button {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .circle p {
@@ -294,6 +295,26 @@ td, th {
 
 h4 {
   font-weight: 600;
+}
+
+.connection-info-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mycol-5 {
+  width: calc(100% / 5);
+}
+
+.connection-info-p {
+  width: 100%;
+  text-align: center;
+  font-size: 130%;
+}
+
+.connection-info-border {
+  border-bottom: 2px solid #67809f;
 }
 
 @media only screen and (max-width: 600px) {

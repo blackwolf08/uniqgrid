@@ -36,10 +36,9 @@ export function authUser(type, userData) {
           resolve();
         })
         .catch(err => {
-          console.log(err)
           dispatch({
             type: ERROR,
-            payload: err.message
+            payload: "Invaild Email/Password"
           });
         });
     });

@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
             <Route path="/dashboard/my-profile" component={MyProfile} />
             <Route
               path="/dashboard/my-sites/:id"
-              exact
+              
               component={ConnectionInfo}
             />
           </Switch>

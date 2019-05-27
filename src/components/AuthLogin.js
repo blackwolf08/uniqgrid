@@ -10,7 +10,8 @@ class AuthLogin extends Component {
     isDisabled: true,
     username: "",
     password: "",
-    isLoading: false
+    isLoading: false,
+    emailNotValid: false
   };
 
   validateEmail() {
@@ -28,10 +29,12 @@ class AuthLogin extends Component {
     }
   }
 
+
   handleSubmit = e => {
     e.preventDefault();
     this.setState({
-      isLoading: true
+      isLoading: true,
+      emailNotValid: false
     });
     this.setState({
       username: this.state.username.toLowerCase
@@ -49,11 +52,7 @@ class AuthLogin extends Component {
         this.props.history.push("/dashboard/my-sites");
       })
       .catch(() => {
-        return(
-          <div>
-            Sorry
-          </div>
-        );
+
       });
   };
 
@@ -95,6 +94,12 @@ class AuthLogin extends Component {
             className="auth-form flex flex-col"
           >
             <span style={{ color: "red" }}>
+              {this.props.error && (
+                <>
+                Email/Password Invalid
+                <br />
+                </>
+              )}
               {this.state.emailNotValid && <>Please enter a valid email</>}
             </span>
             <input
