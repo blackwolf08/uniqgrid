@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom'
 class AuthLogin extends Component {
   state = {
     isDisabled: true,
-    email: "",
+    username: "",
     password: "",
     isLoading: false
   };
 
   validateEmail() {
     let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let emailToVerify = this.state.email;
+    let emailToVerify = this.state.username;
     let result = regex.test(String(emailToVerify).toLowerCase());
     if (!result) {
       this.setState({
@@ -34,7 +34,7 @@ class AuthLogin extends Component {
       isLoading: true
     });
     this.setState({
-      email: this.state.email.toLowerCase
+      username: this.state.username.toLowerCase
     });
     const authType = "signin";
     this.props
@@ -42,14 +42,18 @@ class AuthLogin extends Component {
       .then(() => {
         this.setState({
           isLoading: false,
-          email: "",
+          username: "",
           password: "",
           emailNotValid: false
         });
         this.props.history.push("/dashboard/my-sites");
       })
       .catch(() => {
-        return;
+        return(
+          <div>
+            Sorry
+          </div>
+        );
       });
   };
 
@@ -58,7 +62,7 @@ class AuthLogin extends Component {
       [e.target.name]: e.target.value
     });
 
-    if (this.state.email.length > 1 && this.state.password.length > 1) {
+    if (this.state.username.length > 1 && this.state.password.length > 1) {
       this.setState({
         isDisabled: false
       });
@@ -72,7 +76,7 @@ class AuthLogin extends Component {
       if (this.props.error.length) {
         this.setState({
           isLoading: false,
-          email: "",
+          username: "",
           password: ""
         });
       }
@@ -95,7 +99,7 @@ class AuthLogin extends Component {
             </span>
             <input
               type="text"
-              name="email"
+              name="username"
               placeholder="Email"
               onChange={this.handleChange}
               className="auth-input"

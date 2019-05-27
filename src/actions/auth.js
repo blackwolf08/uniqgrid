@@ -25,16 +25,18 @@ export function authUser(type, userData) {
     return new Promise((resolve, reject) => {
       return apiCall(
         "post",
-        `https://futura-server.herokuapp.com/api/auth/${type}`,
+        "http://portal.uniqgridcloud.com:8080/api/auth/login",
         userData
       )
         .then(({ token, ...user }) => {
+          console.log(token)
           localStorage.setItem("jwtToken", token);
           setAuthorizationToken(token);
           dispatch(setCurrentUser(user));
           resolve();
         })
         .catch(err => {
+          console.log(err)
           dispatch({
             type: ERROR,
             payload: err.message
