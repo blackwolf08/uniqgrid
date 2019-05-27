@@ -4,8 +4,6 @@ import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 
 class NavBar extends Component {
-  state = {};
-
   logout = e => {
     e.preventDefault();
     this.props.logout();
@@ -26,7 +24,7 @@ class NavBar extends Component {
 
 const style = {
   root: {
-    height: "100px",
+    height: "80px",
     width: "100%",
     backgroundColor: "#f1f1f1",
     position: "fixed",

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Connection from "./Connection";
 import { Helmet } from "react-helmet";
+import uuid from "uuid";
 
 export default class MySite extends Component {
   state = {
     connections: [
       {
-        id: 1,
+        _id_: uuid.v4(),
         name: "Connection name 1",
         power: "100 kW",
         powerPer: "55%",
@@ -14,7 +15,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 2,
+        _id_: uuid.v4(),
         name: "Connection name 2",
         power: "100 kW",
         powerPer: "55%",
@@ -22,7 +23,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 3,
+        _id_: uuid.v4(),
         name: "Connection name 3",
         power: "100 kW",
         powerPer: "55%",
@@ -30,7 +31,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 4,
+        _id_: uuid.v4(),
         name: "Connection name 4",
         power: "100 kW",
         powerPer: "55%",
@@ -38,7 +39,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 5,
+        _id_: uuid.v4(),
         name: "Connection name 5",
         power: "100 kW",
         powerPer: "55%",
@@ -46,7 +47,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 6,
+        _id_: uuid.v4(),
         name: "Connection name 6",
         power: "100 kW",
         powerPer: "55%",
@@ -54,7 +55,7 @@ export default class MySite extends Component {
         consumptionPer: "100%"
       },
       {
-        id: 7,
+        _id_: uuid.v4(),
         name: "Connection name 7",
         power: "100 kW",
         powerPer: "55%",
@@ -68,17 +69,15 @@ export default class MySite extends Component {
     document.title = "My Site";
     const list = this.state.connections.map(connection => {
       return (
-        <div>
-          <Connection
-            id={connection.id}
-            key={connection.id}
-            name={connection.name}
-            power={connection.power}
-            powerPer={connection.powerPer}
-            consumption={connection.consumption}
-            consumptionPer={connection.consumptionPer}
-          />
-        </div>
+        <Connection
+          key={connection._id_}
+          id={connection._id_}
+          name={connection.name}
+          power={connection.power}
+          powerPer={connection.powerPer}
+          consumption={connection.consumption}
+          consumptionPer={connection.consumptionPer}
+        />
       );
     });
 

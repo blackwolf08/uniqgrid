@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.5s linear forwards !important;
 }
 
 html,
@@ -72,12 +73,14 @@ button {
   padding: 12px;
 }
 
+
 .auth-button {
   width: 90%;
   background-color: #111111;
   color: white;
   padding: 10px 5px;
   box-shadow: 1px 1px 5px gray;
+  cursor: pointer;
 }
 
 .auth-p {
@@ -110,10 +113,10 @@ button {
 
 .left-part {
   position: fixed;
-  top: 100px;
-  height: calc(100% - 100px);
+  top: 80px;
+  height: calc(100% - 80px);
   background-color: #67809f;
-  width: 300px;
+  width: 200px;
   justify-content: flex-start;
 }
 
@@ -126,6 +129,7 @@ button {
   width: 100%;
   background-color: #67809f;
   color: white;
+  font-weight: 600;
 }
 
 .leftpart-menu:hover {
@@ -137,9 +141,9 @@ button {
 
 .circle {
   margin-top: 10px;
-  width: 150px;
+  width: 100px;
   background-color: #fff;
-  height: 150px;
+  height: 100px;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -148,15 +152,19 @@ button {
 }
 
 .circle p {
-  font-size: 400%;
+  font-size: 200%;
   color: #67809f;
+}
+
+.bg-active {
+  background-color: #34495e;
 }
 
 .view {
   position: fixed;
-  top: 100px;
-  left: 300px;
-  width: calc(100% - 300px);
+  top: 80px;
+  left: 200px;
+  width: calc(100% - 200px);
 }
 
 .link-p {

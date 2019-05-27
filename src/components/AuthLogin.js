@@ -3,6 +3,7 @@ import Spinner from "../images/index";
 import { connect } from "react-redux";
 import logo from "../images/logo.png";
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 class AuthLogin extends Component {
   state = {
@@ -11,6 +12,21 @@ class AuthLogin extends Component {
     password: "",
     isLoading: false
   };
+
+  validateEmail() {
+    let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailToVerify = this.state.email;
+    let result = regex.test(String(emailToVerify).toLowerCase());
+    if (!result) {
+      this.setState({
+        emailNotValid: true
+      });
+    } else {
+      this.setState({
+        emailNotValid: false
+      });
+    }
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -27,7 +43,8 @@ class AuthLogin extends Component {
         this.setState({
           isLoading: false,
           email: "",
-          password: ""
+          password: "",
+          emailNotValid: false
         });
         this.props.history.push("/dashboard/my-sites");
       })
@@ -46,6 +63,8 @@ class AuthLogin extends Component {
         isDisabled: false
       });
     }
+
+    this.validateEmail();
   };
 
   render() {
@@ -71,6 +90,9 @@ class AuthLogin extends Component {
             onSubmit={this.handleSubmit}
             className="auth-form flex flex-col"
           >
+            <span style={{ color: "red" }}>
+              {this.state.emailNotValid && <>Please enter a valid email</>}
+            </span>
             <input
               type="text"
               name="email"
@@ -85,8 +107,8 @@ class AuthLogin extends Component {
               onChange={this.handleChange}
               className="auth-input"
             />
-            <button className="auth-button">Login</button>
-            <p className="auth-p">Forgot Password?</p>
+            <button className="auth-button" disabled={this.state.isDisabled}>Login</button>
+            <Link to="/login" className="auth-p">Forgot Password?</Link>
           </form>
         </div>
       </div>
