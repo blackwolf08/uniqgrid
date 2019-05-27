@@ -18,25 +18,25 @@ export default class Connection extends Component {
     return (
       <Link to={redirect}>
         <div className="mysites-connections" onClick={this.handleClick}>
-          <div className="col-4">
+          <div className="my-col">
             <p>{name}</p>
           </div>
-          <div className="col-4">
+          <div className="my-col">
             <p>
               {power} <span style={{ color: "green" }}>({powerPer})</span>
             </p>
           </div>
-          <div className="col-4">
+          <div className="my-col">
             <p>
               {consumption}{" "}
               <span style={{ color: "red" }}>({consumptionPer})</span>
             </p>
           </div>
           <div
-            className="col-4 mysites-icons"
+            className="my-col mysites-icons"
             style={{ display: "flex", justifyContent: "space-around" }}
           >
-            <i className="far fa-chart-bar" /> <i className="fas fa-cog" />
+            <i className="far fa-chart-bar"></i> <i className="fas fa-cog"></i>
           </div>
         </div>
       </Link>
