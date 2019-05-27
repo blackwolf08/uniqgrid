@@ -5,8 +5,8 @@ export default class AddressDetails extends Component {
         return (
             <div className="address-details">
                 <p>Street Address</p>
-                <p>City <i class="fas fa-caret-down"></i></p>
-                <p>State <i class="fas fa-caret-down"></i></p>
+                <p>City <i className="fas fa-caret-down"></i></p>
+                <p>State <i className="fas fa-caret-down"></i></p>
                 <p>Pincode</p>
             </div>
         )

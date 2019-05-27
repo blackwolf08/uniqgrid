@@ -18,6 +18,48 @@ export default class ConnectionInfo extends Component {
   };
 
   componentDidMount() {
+
+    let url = window.location.href;
+    url.split('/')
+    
+    if(url.includes('connection-details'))
+    {
+      this.setState({
+        tab2: " connection-info-border",
+        tab1: ''
+      })
+    }
+
+    else if(url.includes('local-generation'))
+    {
+      this.setState({
+        tab3: " connection-info-border",
+        tab1: ''
+      })
+    }
+
+    else if(url.includes('solar-pv-generator'))
+    {
+      this.setState({
+        tab4: " connection-info-border",
+        tab1: ''
+      })
+    }
+
+    else if(url.includes('installed-devices'))
+    {
+      this.setState({
+        tab5: " connection-info-border",
+        tab1: ''
+      })
+    }
+
+    else {
+      this.setState({
+        tab1: ' connection-info-border'
+      })
+    }
+
     const {
       match: { params }
     } = this.props;
@@ -26,6 +68,8 @@ export default class ConnectionInfo extends Component {
       id
     });
   }
+
+  
 
   render() {
     return (
@@ -37,27 +81,41 @@ export default class ConnectionInfo extends Component {
         <div className="connection-info-hero">
           <div className="connection-info-tabs" style={{ cursor: "pointer" }}>
             <div className={"mycol-5" + this.state.tab1}>
-              <Link to={`/dashboard/my-sites/${this.state.id}`}>
-                <p className="connection-info-p">Address Details</p>
+              <Link
+                
+                to={`/dashboard/my-sites/${this.state.id}`}
+              >
+                <p onClick={this.handleAdd} className="connection-info-p">Address Details</p>
               </Link>
             </div>
             <div className={"mycol-5" + this.state.tab2}>
-              <Link to={`/dashboard/my-sites/${this.state.id}/connection-details`}>
+              <Link
+                onClick={this.handleConn}                to={`/dashboard/my-sites/${this.state.id}/connection-details`}
+              >
                 <p className="connection-info-p">Connection Details</p>
               </Link>
             </div>
             <div className={"mycol-5" + this.state.tab3}>
-              <Link to={`/dashboard/my-sites/${this.state.id}/local-generation`}>
+              <Link
+                
+                to={`/dashboard/my-sites/${this.state.id}/local-generation`}
+              >
                 <p className="connection-info-p">Local Generation</p>
               </Link>
             </div>
             <div className={"mycol-5" + this.state.tab4}>
-              <Link to={`/dashboard/my-sites/${this.state.id}/solar-pv-generator`}>
+              <Link
+             
+                to={`/dashboard/my-sites/${this.state.id}/solar-pv-generator`}
+              >
                 <p className="connection-info-p">Solar PV Generator</p>
               </Link>
             </div>
             <div className={"mycol-5" + this.state.tab5}>
-              <Link to={`/dashboard/my-sites/${this.state.id}/installed-devices`}>
+              <Link
+
+                to={`/dashboard/my-sites/${this.state.id}/installed-devices`}
+              >
                 <p className="connection-info-p">Installed Devices</p>
               </Link>
             </div>

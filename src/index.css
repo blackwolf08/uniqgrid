@@ -73,7 +73,6 @@ button {
   padding: 12px;
 }
 
-
 .auth-button {
   width: 90%;
   background-color: #111111;
@@ -207,9 +206,9 @@ a {
 }
 
 .feedback-hero {
-height: 100%;
-width: 100%;
-margin-top: -50px;
+  height: 100%;
+  width: 100%;
+  margin-top: -50px;
 }
 
 .feedback-root {
@@ -249,14 +248,13 @@ margin-top: -50px;
   color: #34495e;
   cursor: pointer;
   font-size: 110%;
-  
 }
 
 .star-active {
   color: gold;
 }
 
-.myrequest-hero{
+.myrequest-hero {
   padding: 20px;
 }
 
@@ -270,16 +268,16 @@ th {
   border: none;
 }
 
-td{
+td {
   border-bottom: 1px solid #a1a1a1;
   border-left: 1px solid #a1a1a1;
   border-right: 1px solid #a1a1a1;
 }
 
-td, th {
+td,
+th {
   width: 100px;
 }
-
 
 .view {
   overflow-y: scroll;
@@ -317,7 +315,11 @@ h4 {
   border-bottom: 2px solid #67809f;
 }
 
-.installed-devices, .address-details, .connection-details, .local-generation, .solar-pv-generator {
+.installed-devices,
+.address-details,
+.connection-details,
+.local-generation,
+.solar-pv-generator {
   padding: 50px;
 }
 
@@ -333,18 +335,19 @@ h4 {
   border-radius: 20px;
 }
 
-.solar-pv-generator-box{
+.solar-pv-generator-box {
   display: flex;
 }
 
-.solar-pv-generator-heading{
+.solar-pv-generator-heading {
   font-weight: 600;
 }
 
 i {
   color: grey;
 }
-.solar-pv-generator-box-right{
+
+.solar-pv-generator-box-right {
   padding-left: 30px;
   padding-top: 15px;
 }
