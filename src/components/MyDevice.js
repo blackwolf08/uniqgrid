@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import DeviceList from './DeviceList'
+import uuid from 'uuid'
 
 export default class MyDevice extends Component {
 
@@ -15,7 +16,7 @@ export default class MyDevice extends Component {
   render() {
 
     const listOfConnections = this.state.connections.map(connection => {
-      return <DeviceList name={connection} />
+      return <DeviceList key={uuid.v4()} name={connection} />
     })
 
     return (

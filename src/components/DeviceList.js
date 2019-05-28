@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import uuid from 'uuid'
 
 class DeviceList extends Component {
 
@@ -39,7 +40,7 @@ class DeviceList extends Component {
         console.log(this.props.devices)
         const deviceList = this.state.devices.map(device => {
             return (
-                <div style={{ display:'flex'}}>
+                <div key={uuid.v4()} style={{ display:'flex'}}>
                 <div className="my-col bold">
                 <p>{device.name}</p>
                 </div>
