@@ -14,7 +14,10 @@ export default class SolarPvGenerator extends Component {
             <p>generator at this address?</p>
           </div>
           <div className="solar-pv-generator-box-right">
-            <input type="checkbox" checked />
+            <label className="my-container">
+              <input type="checkbox" />
+              <span className="my-checkmark" />
+            </label>
           </div>
         </div>
       </div>

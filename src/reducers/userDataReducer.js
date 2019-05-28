@@ -1,13 +1,19 @@
-import { USERDATA, CUSTOMERINFO } from "../actions/types";
+import { USERDATA, CUSTOMERINFO, DEVICETYPES } from "../actions/types";
 
 
 const initialState = {
   data: {},
-  customerInfo: {}
+  customerInfo: {},
+  deviceTypes: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case DEVICETYPES:
+      return {
+        ...state,
+        deviceTypes: action.payload
+      }
     case USERDATA:
       return {
         ...state,

@@ -1,4 +1,4 @@
-import { USERDATA, CUSTOMERINFO } from './types'
+import { USERDATA, CUSTOMERINFO, DEVICETYPES } from './types'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
@@ -23,6 +23,17 @@ export const fetchUserData = () => dispatch => {
     .then((res)=>{
       dispatch({
           type: CUSTOMERINFO,
+          payload: res
+      })
+    })
+    .catch((error)=>{
+      console.log(error)
+    });
+
+    axios.get(`http://localhost:1337/portal.uniqgridcloud.com:8080/api/device/types`)
+    .then((res)=>{
+      dispatch({
+          type: DEVICETYPES,
           payload: res
       })
     })
