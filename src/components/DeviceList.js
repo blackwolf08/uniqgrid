@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class DeviceList extends Component {
+class DeviceList extends Component {
 
     state = {
         //Device list for current connection
@@ -35,6 +36,7 @@ export default class DeviceList extends Component {
     render() {
 
         const { name } = this.props;
+        console.log(this.props.devices)
         const deviceList = this.state.devices.map(device => {
             return (
                 <div style={{ display:'flex'}}>
@@ -65,3 +67,9 @@ export default class DeviceList extends Component {
         )
     }
 }
+
+const mapSateToProps = state => ({
+    devices: state.userdata.data
+})
+
+export default connect(mapSateToProps)(DeviceList);

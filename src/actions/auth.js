@@ -29,7 +29,6 @@ export function authUser(type, userData) {
         userData
       )
         .then(({ token, ...user }) => {
-          console.log(token)
           localStorage.setItem("jwtToken", token);
           setAuthorizationToken(token);
           dispatch(setCurrentUser(user));

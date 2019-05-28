@@ -6,8 +6,7 @@ export default class MyDevice extends Component {
 
   state = {
     connections: [
-      1,
-      2
+      1
       //JSON response from uniqgrid server
     ]
   }

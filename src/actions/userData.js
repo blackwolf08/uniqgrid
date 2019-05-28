@@ -1,4 +1,4 @@
-import { USERDATA } from './types'
+import { USERDATA, CUSTOMERINFO } from './types'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
@@ -10,7 +10,6 @@ export const fetchUserData = () => dispatch => {
     const header = `X-Authorization: Bearer ${jwt}`;
     axios.get(URL, { headers: { header } })
     .then((res)=>{
-        console.log(res.data.data)
       dispatch({
           type: USERDATA,
           payload: res.data.data
@@ -19,4 +18,17 @@ export const fetchUserData = () => dispatch => {
     .catch((error)=>{
       console.log(error)
     });
+
+    axios.get(`http://localhost:1337/portal.uniqgridcloud.com:8080/api/customer/${userId}`)
+    .then((res)=>{
+      dispatch({
+          type: CUSTOMERINFO,
+          payload: res
+      })
+    })
+    .catch((error)=>{
+      console.log(error)
+    });
+
+
   };
