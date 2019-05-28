@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import { connect } from 'react-redux';
 
-export default class MyProfile extends Component {
-  componentDidMount() {
-    const jwt = localStorage.jwtToken;
-    console.log(jwt);
-    const URL = "http://portal.uniqgridcloud.com:8080/api/customers";
-
-    axios.get(URL).then(e => {
-      console.log(e);
-    });
-  }
+class MyProfile extends Component {
 
   render() {
     return (
@@ -24,3 +15,9 @@ export default class MyProfile extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  data : state.userdata.data
+})
+
+export default connect(mapStateToProps)(MyProfile);
