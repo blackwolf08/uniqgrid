@@ -35,7 +35,6 @@ class MyDevice extends Component {
           this.setState({
             keys: res.data,
             isLoading: false,
-            selectValue: this.state.keys
           });
         });
     });
@@ -47,7 +46,6 @@ class MyDevice extends Component {
     this.setState({ selectValue: e.target.value });
     setTimeout(() => {
       let endtime = Date.now();
-      console.log(endtime);
       axios
         .get(
           `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
@@ -57,10 +55,8 @@ class MyDevice extends Component {
           }&startTs=1554396240000&endTs=${endtime}`
         )
         .then(res => {
-          console.log(res.data);
           let a = res.data;
           let s = a[Object.keys(a)[0]];
-          console.log(s);
           this.setState({
             isLoading: false,
             graphData: s
@@ -73,7 +69,6 @@ class MyDevice extends Component {
     let s = this.dataPoints();
     let heading = this.state.selectValue.split("_");
     heading = heading.join(" ");
-    heading = this.titleCase(heading);
     const options = {
       title: {
         text: `${heading} Analysis`
@@ -92,16 +87,6 @@ class MyDevice extends Component {
     return options;
   };
 
-  titleCase = str => {
-    let splitStr = str.toLowerCase().split(" ");
-    for (let i = 0; i < splitStr.length; i++) {
-      if (splitStr.length[i] < splitStr.length) {
-        splitStr[i].charAt(0).toUpperCase();
-      }
-      str = splitStr.join(" ");
-    }
-    return str;
-  };
 
   dataPoints = () => {
     let s = this.state.graphData.map(e => {
@@ -111,7 +96,6 @@ class MyDevice extends Component {
         y: e.value * 1
       };
     });
-    console.log(s);
     return s;
   };
 
@@ -131,11 +115,8 @@ class MyDevice extends Component {
       let keyValue = key;
       let keyArray = keyValue.split("_");
       keyArray = keyArray.join(" ");
-      keyArray = this.titleCase(keyArray);
       return (
-        <>
-          <option value={key}>{keyArray}</option>
-        </>
+          <option key={uuid.v4()} value={key}>{keyArray}</option>
       );
     });
 
