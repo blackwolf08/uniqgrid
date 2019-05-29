@@ -112,10 +112,10 @@ button {
 
 .left-part {
   position: fixed;
-  top: 80px;
-  height: calc(100% - 80px);
+  top: 60px;
+  height: calc(100% - 60px);
   background-color: #67809f;
-  width: 200px;
+  width: 250px;
   justify-content: flex-start;
 }
 
@@ -163,9 +163,9 @@ button {
 .view {
   position: fixed;
   top: 80px;
-  left: 200px;
-  width: calc(100% - 200px);
-  height: calc(100% - 80px);
+  left: 250px;
+  width: calc(100% - 250px);
+  height: calc(100% - 60px);
 }
 
 .link-p {

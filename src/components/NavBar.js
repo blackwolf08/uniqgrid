@@ -27,7 +27,7 @@ class NavBar extends Component {
 
 const style = {
   root: {
-    height: "80px",
+    height: "60px",
     width: "100%",
     backgroundColor: "#f1f1f1",
     position: "fixed",
