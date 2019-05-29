@@ -32,3 +32,5 @@ export default class MyDevice extends Component {
     );
   }
 }
+
+

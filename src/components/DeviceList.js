@@ -1,57 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import uuid from 'uuid'
 
 class DeviceList extends Component {
 
     state = {
         //Device list for current connection
-        devices: [
-            {
-                name: "Device 1",
-                added: "Added on 24/5/2019",
-                power: "2000 Watts",
-                action: "Monitor"
-            },
-            {
-                name: "Device 1",
-                added: "Added on 24/5/2019",
-                power: "2000 Watts",
-                action: "Monitor"
-            },
-            {
-                name: "Device 1",
-                added: "Added on 24/5/2019",
-                power: "2000 Watts",
-                action: "Monitor"
-            },
-            {
-                name: "Device 1",
-                added: "Added on 24/5/2019",
-                power: "2000 Watts",
-                action: "Monitor"
-            },
-        ]
+        devices: this.props.devices
     }
 
     render() {
-
+        console.log(this.props.devices)
+        
         const { name } = this.props;
         console.log(this.props.devices)
         const deviceList = this.state.devices.map(device => {
             return (
-                <div key={uuid.v4()} style={{ display:'flex'}}>
+                <div key={device.id.id} style={{ display:'flex', border:'1px solid grey'}}>
                 <div className="my-col bold">
                 <p>{device.name}</p>
                 </div>
                 <div className="my-col ">
-                <p>{device.added}</p>
+                <p>{device.createdTime}</p>
                 </div>
                 <div className="my-col ">
-                <p>{device.power}</p>
+                <p>2000 Watts</p>
                 </div>
                 <div className="my-col ">
-                <p>{device.action}</p>
+                <p>Monitor</p>
                 </div>
                 </div>
             )

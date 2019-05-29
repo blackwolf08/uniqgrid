@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import logo from "../images/logo.png";
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
-import { fetchUserData } from '../actions/userData'
 
 class AuthLogin extends Component {
   state = {
@@ -50,7 +49,6 @@ class AuthLogin extends Component {
           password: "",
           emailNotValid: false
         });
-        this.props.fetchUserData();
         this.props.history.push("/dashboard/my-sites");
       })
       .catch(() => {
@@ -131,4 +129,4 @@ const mapStateToProps = state => ({
   error: state.error.err
 });
 
-export default connect(mapStateToProps, { fetchUserData })(AuthLogin);
+export default connect(mapStateToProps)(AuthLogin);

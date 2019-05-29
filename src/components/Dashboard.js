@@ -8,9 +8,31 @@ import MyRequests from "./MyRequests";
 import MyProfile from "./MyProfile";
 import FeedBack from "./FeedBack";
 import ConnectionInfo from "./ConnectionInfo";
+import { fetchUserData } from '../actions/userData'
+import { connect } from 'react-redux'
+import Spinner from '../images/index'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
+
+
+
   render() {
+
+    if(this.props.isLoading)
+    {
+      this.props.fetchUserData()
+      return (
+        <div>
+        <NavBar />
+        <LeftPart />
+        <div className="view">
+          <Spinner />
+        </div>
+      </div>
+      )
+    }
+
+
     return (
       <div>
         <NavBar />
@@ -33,3 +55,9 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isLoading: state.userdata.isLoading
+})
+
+export default connect(mapStateToProps, { fetchUserData })(Dashboard);

@@ -28,7 +28,8 @@ export function authUser(type, userData) {
         "http://portal.uniqgridcloud.com:8080/api/auth/login",
         userData
       )
-        .then(({ token, ...user }) => {
+        .then(async ({ token, ...user }) => {
+          
           localStorage.setItem("jwtToken", token);
           setAuthorizationToken(token);
           dispatch(setCurrentUser(user));

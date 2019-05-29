@@ -40,7 +40,7 @@ export default class LeftPart extends Component {
     return (
       <div className="left-part flex flex-col">
         <div className="circle">
-          <p>FL</p>
+          <p>UD</p>
         </div>
         <button className={this.state.mysite}>
           <Link
