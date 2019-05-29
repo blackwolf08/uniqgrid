@@ -25,16 +25,17 @@ class MyDevice extends Component {
       deviceId,
       isLoading: true
     });
-    const URL = `http://localhost:1337/portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
+    const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
     axios.get(URL).then(res => {
       axios
         .get(
-          `http://localhost:1337/portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${deviceId}/keys/timeseries`
+          `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${deviceId}/keys/timeseries`
         )
         .then(res => {
           this.setState({
             keys: res.data,
-            isLoading: false
+            isLoading: false,
+            selectValue: this.state.keys
           });
         });
     });
@@ -49,7 +50,7 @@ class MyDevice extends Component {
       console.log(endtime);
       axios
         .get(
-          `http://localhost:1337/portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
             this.state.deviceId
           }/values/timeseries?limit=100&agg=NONE&keys=${
             this.state.selectValue
