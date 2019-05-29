@@ -71,9 +71,12 @@ class MyDevice extends Component {
 
   setOptions = () => {
     let s = this.dataPoints();
+    let heading = this.state.selectValue.split("_");
+    heading = heading.join(" ");
+    heading = this.titleCase(heading);
     const options = {
       title: {
-        text: `${this.state.selectValue} Analysis`
+        text: `${heading} Analysis`
       },
       animationEnabled: true,
       exportEnabled: true,
@@ -89,11 +92,22 @@ class MyDevice extends Component {
     return options;
   };
 
+  titleCase = str => {
+    let splitStr = str.toLowerCase().split(" ");
+    for (let i = 0; i < splitStr.length; i++) {
+      if (splitStr.length[i] < splitStr.length) {
+        splitStr[i].charAt(0).toUpperCase();
+      }
+      str = splitStr.join(" ");
+    }
+    return str;
+  };
+
   dataPoints = () => {
     let s = this.state.graphData.map(e => {
-      let date  = (new Date(e.ts)).toUTCString().split(" ");
+      let date = new Date(e.ts).toUTCString().split(" ");
       return {
-        label: date[0]+date[1]+date[2]+date[3],
+        label: date[0] + date[1] + date[2] + date[3],
         y: e.value * 1
       };
     });
@@ -114,9 +128,13 @@ class MyDevice extends Component {
     });
 
     const listOfKeys = this.state.keys.map(key => {
+      let keyValue = key;
+      let keyArray = keyValue.split("_");
+      keyArray = keyArray.join(" ");
+      keyArray = this.titleCase(keyArray);
       return (
         <>
-          <option value={key}>{key}</option>
+          <option value={key}>{keyArray}</option>
         </>
       );
     });
@@ -143,9 +161,8 @@ class MyDevice extends Component {
                 </select>
                 {/* <p>{this.state.graphData}</p> */}
                 <div>
-                {this.state.graphData && this.state.graphData.length === 0 && (
-                    <h4>No Data</h4>
-                  )}
+                  {this.state.graphData &&
+                    this.state.graphData.length === 0 && <h4>No Data</h4>}
                   {this.state.graphData && this.state.graphData.length > 1 && (
                     <CanvasJSChart
                       options={this.setOptions()}
