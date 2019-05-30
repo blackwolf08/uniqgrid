@@ -464,6 +464,24 @@ i {
   height: 40px;
 }
 
+.address-details-input {
+  outline: none;
+  padding: 0.5rem;
+  background-color: #eee;
+  border: none;
+}
+
+.address-details-div {
+  display: flex;
+  align-content: center;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.address-details-div p {
+  width: 200px !important;
+}
+
 @media only screen and (max-width: 600px) {
   .left-part {
     display: none;

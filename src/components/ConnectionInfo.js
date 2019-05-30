@@ -6,15 +6,18 @@ import ConnectionDetails from "./ConnectionDetails";
 import LocalGeneration from "./LocalGeneration";
 import SolarPvGenerator from "./SolarPvGenerator";
 import InstalledDevices from "./InstalledDevices";
+import { fetchConnetionInfo } from "../actions/fetchConnectionInfo";
+import { connect } from "react-redux";
 
-export default class ConnectionInfo extends Component {
+class ConnectionInfo extends Component {
   state = {
     id: 0,
     tab1: " connection-info-border",
     tab2: "",
     tab3: "",
     tab4: "",
-    tab5: ""
+    tab5: "",
+    data: {}
   };
 
   componentDidMount() {
@@ -54,6 +57,13 @@ export default class ConnectionInfo extends Component {
     this.setState({
       id
     });
+    this.props.fetchConnetionInfo(id).then(res => {
+      if (res) {
+        this.setState({
+          data: this.props.info
+        });
+      }
+    });
   }
 
   render() {
@@ -66,7 +76,7 @@ export default class ConnectionInfo extends Component {
         <div className="connection-info-hero">
           <div className="connection-info-tabs" style={{ cursor: "pointer" }}>
             <div className={"mycol-5" + this.state.tab1}>
-              <Link to={`/dashboard/my-sites/${this.state.id}`}>
+              <Link to={`/dashboard/my-sites/${this.state.id}/address-details`}>
                 <p onClick={this.handleAdd} className="connection-info-p">
                   Address Details
                 </p>
@@ -105,24 +115,39 @@ export default class ConnectionInfo extends Component {
           <Switch>
             <Route
               exact
-              path={`/dashboard/my-sites/${this.state.id}`}
-              component={AddressDetails}
+              path={`/dashboard/my-sites/${this.state.id}/address-details`}
+              render={props => (
+                <AddressDetails {...props} data={this.state.data} />
+              )}
+              key="installed-devices"
             />
             <Route
+              key="installed-devices"
               path="/dashboard/my-sites/:id/connection-details"
-              component={ConnectionDetails}
+              render={props => (
+                <ConnectionDetails data={this.state.data} {...props} />
+              )}
             />
             <Route
+              key="installed-devices"
               path="/dashboard/my-sites/:id/local-generation"
-              component={LocalGeneration}
+              render={props => (
+                <LocalGeneration data={this.state.data} {...props} />
+              )}
             />
             <Route
+              key="installed-devices"
               path="/dashboard/my-sites/:id/solar-pv-generator"
-              component={SolarPvGenerator}
+              render={props => (
+                <SolarPvGenerator data={this.state.data} {...props} />
+              )}
             />
             <Route
+              key="installed-devices"
               path="/dashboard/my-sites/:id/installed-devices"
-              component={InstalledDevices}
+              render={props => (
+                <InstalledDevices data={this.state.data} {...props} />
+              )}
             />
           </Switch>
         </div>
@@ -130,3 +155,12 @@ export default class ConnectionInfo extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  info: state.connectionInfo.data
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchConnetionInfo }
+)(ConnectionInfo);

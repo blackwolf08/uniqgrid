@@ -14,7 +14,7 @@ export default class Connection extends Component {
       consumptionPer
     } = this.props;
 
-    const redirect = `/dashboard/my-sites/${id}`;
+    const redirect = `/dashboard/my-sites/${id}/address-details`;
     return (
       <Link to={redirect}>
         <div className="mysites-connections" onClick={this.handleClick}>
@@ -36,7 +36,7 @@ export default class Connection extends Component {
             className="my-col mysites-icons"
             style={{ display: "flex", justifyContent: "space-around" }}
           >
-            <i className="far fa-chart-bar"></i> <i className="fas fa-cog"></i>
+            <i className="far fa-chart-bar" /> <i className="fas fa-cog" />
           </div>
         </div>
       </Link>

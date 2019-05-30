@@ -13,45 +13,36 @@ class AddressDetails extends Component {
     isLoading: true
   };
 
-  componentWillMount() {
+  componentWillReceiveProps() {
     this.setState({
       isLoading: true
     });
-    let url = window.location.href;
-    url.split("/");
-    this.props.fetchConnetionInfo(url[url.length - 1]).then(res => {
-      if (res) {
+
+    Object.keys(this.props.data).forEach(key => {
+      if (key.indexOf("city") === 0) {
+        console.log(key, key.indexOf("city"));
         this.setState({
-          data: this.props.info
-        });
-        console.log(this.state.data);
-        Object.keys(this.state.data).forEach(key => {
-          if (key.indexOf("city") === 0) {
-            console.log(key, key.indexOf("city"));
-            this.setState({
-              city: this.state.data[key].value.toString()
-            });
-          }
-          if (key.indexOf("street") === 0) {
-            this.setState({
-              street: this.state.data[key].value.toString()
-            });
-          }
-          if (key.indexOf("state") === 0) {
-            this.setState({
-              state: this.state.data[key].value.toString()
-            });
-          }
-          if (key.indexOf("pincode") === 0) {
-            this.setState({
-              state: this.state.data[key].value.toString()
-            });
-          }
-        });
-        this.setState({
-          isLoading: false
+          city: this.props.data[key].value.toString()
         });
       }
+      if (key.indexOf("street") === 0) {
+        this.setState({
+          street: this.props.data[key].value.toString()
+        });
+      }
+      if (key.indexOf("state") === 0) {
+        this.setState({
+          state: this.props.data[key].value.toString()
+        });
+      }
+      if (key.indexOf("pincode") === 0) {
+        this.setState({
+          state: this.props.data[key].value.toString()
+        });
+      }
+    });
+    this.setState({
+      isLoading: false
     });
   }
 
@@ -70,24 +61,50 @@ class AddressDetails extends Component {
       <div className="address-details">
         {!this.state.isLoading && (
           <>
-            <p>
-              Street Address -{" "}
+            <div className="address-details-div">
+              <p>Street Address</p>
               <input
+                className="address-details-input "
                 type="text"
                 value={this.state.street}
                 placeholder={this.state.street}
                 onChange={this.handleChange}
                 name="street"
               />{" "}
-            </p>
-            <p>
-              City - {this.state.city} <i className="fas fa-caret-down" />
-            </p>
-            <p>
-              State - {this.state.state}
-              <i className="fas fa-caret-down" />
-            </p>
-            <p>Pincode - {this.state.pincode}</p>
+            </div>
+            <div className="address-details-div ">
+              <p>City</p>
+              <input
+                className="address-details-input "
+                type="text"
+                value={this.state.city}
+                placeholder={this.state.city}
+                onChange={this.handleChange}
+                name="city"
+              />{" "}
+            </div>
+            <div className="address-details-div ">
+              <p>State</p>
+              <input
+                className="address-details-input "
+                type="text"
+                value={this.state.state}
+                placeholder={this.state.state}
+                onChange={this.handleChange}
+                name="state"
+              />{" "}
+            </div>
+            <div className="address-details-div ">
+              <p>Pincode</p>
+              <input
+                className="address-details-input "
+                type="text"
+                value={this.state.pincode}
+                placeholder={this.state.pincode}
+                onChange={this.handleChange}
+                name="pincode"
+              />{" "}
+            </div>
           </>
         )}
       </div>
