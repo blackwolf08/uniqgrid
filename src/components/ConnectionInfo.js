@@ -87,9 +87,9 @@ class ConnectionInfo extends Component {
     return (
       <div className="view">
         <Helmet>
-          <title>{`Connection name ${this.state.name}`}</title>
+          <title>{`${this.state.name}`}</title>
         </Helmet>
-        <h1 className="mysites-heading">Connection Name {this.state.name}</h1>
+        <h1 className="mysites-heading">{this.state.name}</h1>
         <div className="connection-info-hero">
           <div className="connection-info-tabs" style={{ cursor: "pointer" }}>
             <div className={"mycol-5" + this.state.tab1}>
