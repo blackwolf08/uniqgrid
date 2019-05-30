@@ -20,7 +20,6 @@ class AddressDetails extends Component {
 
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("city") === 0) {
-        console.log(key, key.indexOf("city"));
         this.setState({
           city: this.props.data[key].value.toString()
         });

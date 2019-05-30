@@ -17,7 +17,6 @@ export default class ConnectionDetails extends Component {
 
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("connected") === 0) {
-        console.log(key, key.indexOf("city"));
         this.setState({
           connectedLoad: this.props.data[key].value.toString()
         });
@@ -60,7 +59,6 @@ export default class ConnectionDetails extends Component {
   };
 
   render() {
-    console.log(this.props.data);
     return (
       <div className="address-details">
         {!this.state.isLoading && (
