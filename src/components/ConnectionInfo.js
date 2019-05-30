@@ -17,8 +17,13 @@ class ConnectionInfo extends Component {
     tab3: "",
     tab4: "",
     tab5: "",
-    data: {}
+    data: {},
+    name: ""
   };
+
+  componentDidUpdate() {
+    //console.log("up");
+  }
 
   componentDidMount() {
     let url = window.location.href;
@@ -62,17 +67,29 @@ class ConnectionInfo extends Component {
         this.setState({
           data: this.props.info
         });
+        let name = "";
+        Object.keys(this.state.data).forEach(key => {
+          if (key.indexOf("connection") === 12) {
+            //console.log(key.indexOf("connection"));
+            name = this.state.data[key].value.toString();
+          }
+        });
+        this.setState({
+          name
+        });
       }
     });
   }
 
   render() {
+    //12
+
     return (
       <div className="view">
         <Helmet>
-          <title>{`Connection name ${this.state.id}`}</title>
+          <title>{`Connection name ${this.state.name}`}</title>
         </Helmet>
-        <h1 className="mysites-heading">Connection Name {this.state.id}</h1>
+        <h1 className="mysites-heading">Connection Name {this.state.name}</h1>
         <div className="connection-info-hero">
           <div className="connection-info-tabs" style={{ cursor: "pointer" }}>
             <div className={"mycol-5" + this.state.tab1}>
