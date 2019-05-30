@@ -55,8 +55,6 @@ button {
 }
 
 .auth-logo {
-  position: absolute;
-  top: 0;
   height: 100px;
 }
 
@@ -323,26 +321,35 @@ h4 {
   padding: 50px;
 }
 
-
 .solar-pv-generator > p {
   height: 100px;
+  margin: 0;
+  width: 100%;
 }
 
 .local-generation > p {
-  width: 50%;
+  width: 100%;
+  margin: 0;
+  width: 100%;
 }
 
 .connection-details > p {
   width: 50%;
+  margin: 0;
+  width: 100%;
 }
 
 .address-details > p {
   width: 50%;
   text-align: justify;
+  margin: 0;
+  width: 100%;
 }
 
 .installed-devices > p {
   width: 50%;
+  margin: 0;
+  width: 100%;
 }
 
 .my-container {
@@ -411,7 +418,6 @@ h4 {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
 
 .installed-devices {
   display: flex;

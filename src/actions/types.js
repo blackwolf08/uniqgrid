@@ -3,4 +3,5 @@ export const LOADING = "LOADING";
 export const ERROR = "ERROR";
 export const USERDATA = "USERDATA";
 export const CUSTOMERINFO = "CUSTOMERINFO";
-export const DEVICETYPES ="DEVICETYPES";
+export const DEVICETYPES = "DEVICETYPES";
+export const FETCH_CONNECTION_INFO = "FETCH_CONNECTION_INFO";

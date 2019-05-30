@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Connection from "./Connection";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 export default class MySite extends Component {
   state = {
@@ -61,24 +62,49 @@ export default class MySite extends Component {
         consumption: "100 kW",
         consumptionPer: "100%"
       }
-    ]
+    ],
+    maxConnections: 0
   };
 
+  componentWillMount() {
+    const URL =
+      "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
+
+    axios.get(URL).then(res => {
+      const properties = res.data.properties;
+      let arrayOfStrings = [];
+      let noOfSites = [];
+      Object.keys(properties).forEach(key => {
+        arrayOfStrings.push(key);
+      });
+      arrayOfStrings.forEach(site => {
+        let nanCheck = isNaN(parseInt(site.charAt(site.length - 2), 10));
+        if (site.search("site") && !nanCheck) {
+          noOfSites.push(parseInt(site.charAt(site.length - 2), 10));
+        }
+      });
+      noOfSites.sort();
+      this.setState({
+        maxConnections: noOfSites[noOfSites.length - 1]
+      });
+    });
+  }
+
   render() {
-    document.title = "My Site";
-    const list = this.state.connections.map(connection => {
-      return (
+    let list = [];
+    for (let i = 1; i <= this.state.maxConnections; i++) {
+      list.push(
         <Connection
-          key={connection._id_}
-          id={connection._id_}
-          name={connection.name}
-          power={connection.power}
-          powerPer={connection.powerPer}
-          consumption={connection.consumption}
-          consumptionPer={connection.consumptionPer}
+          key={i}
+          id={i}
+          name={`Site ${i}`}
+          power={`100 kW`}
+          powerPer={`55%`}
+          consumption={`100 kW`}
+          consumptionPer={`100%`}
         />
       );
-    });
+    }
 
     return (
       <div className="mysites-root">
