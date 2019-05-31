@@ -10,7 +10,8 @@ export default class ConnectionDetails extends Component {
     elecQuality: ""
   };
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(props) {
+    console.log(props);
     this.setState({
       isLoading: true
     });

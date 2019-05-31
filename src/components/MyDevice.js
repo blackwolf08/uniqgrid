@@ -48,13 +48,13 @@ class MyDevice extends Component {
     });
     this.setState({ selectValue: e.target.value });
     let endtime = Date.now();
-    let startTime = this.state.startTime;
+    let startTime = Date.now() - 604800000;
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
           this.state.deviceId
         }/values/timeseries?limit=100&agg=NONE&keys=${
-          this.state.selectValue
+          e.target.value
         }&startTs=${startTime}&endTs=${endtime}`
       )
       .then(res => {
@@ -203,7 +203,6 @@ class MyDevice extends Component {
         </option>
       );
     });
-    console.log(this.props.connectionName);
     return (
       <div>
         <Helmet>
