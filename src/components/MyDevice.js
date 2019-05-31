@@ -28,6 +28,11 @@ class MyDevice extends Component {
       isLoading: true
     });
     const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
+    // let config = {
+    //   headers: {
+    //     Authorization: "Bearer " + localStorage.jwtToken
+    //   }
+    // };
     axios.get(URL).then(res => {
       axios
         .get(

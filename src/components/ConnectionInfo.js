@@ -18,7 +18,8 @@ class ConnectionInfo extends Component {
     tab4: "",
     tab5: "",
     data: {},
-    name: ""
+    name: "",
+    update: false
   };
 
   componentDidUpdate() {
@@ -134,7 +135,11 @@ class ConnectionInfo extends Component {
               exact
               path={`/dashboard/my-sites/${this.state.id}/address-details`}
               render={props => (
-                <AddressDetails {...props} data={this.state.data} />
+                <AddressDetails
+                  update={this.update}
+                  {...props}
+                  data={this.state.data}
+                />
               )}
               key="installed-devices"
             />
@@ -142,31 +147,48 @@ class ConnectionInfo extends Component {
               key="installed-devices"
               path="/dashboard/my-sites/:id/connection-details"
               render={props => (
-                <ConnectionDetails data={this.state.data} {...props} />
+                <ConnectionDetails
+                  update={this.update}
+                  data={this.state.data}
+                  {...props}
+                />
               )}
             />
             <Route
               key="installed-devices"
               path="/dashboard/my-sites/:id/local-generation"
               render={props => (
-                <LocalGeneration data={this.state.data} {...props} />
+                <LocalGeneration
+                  update={this.update}
+                  data={this.state.data}
+                  {...props}
+                />
               )}
             />
             <Route
               key="installed-devices"
               path="/dashboard/my-sites/:id/solar-pv-generator"
               render={props => (
-                <SolarPvGenerator data={this.state.data} {...props} />
+                <SolarPvGenerator
+                  update={this.update}
+                  data={this.state.data}
+                  {...props}
+                />
               )}
             />
             <Route
               key="installed-devices"
               path="/dashboard/my-sites/:id/installed-devices"
               render={props => (
-                <InstalledDevices data={this.state.data} {...props} />
+                <InstalledDevices
+                  update={this.update}
+                  data={this.state.data}
+                  {...props}
+                />
               )}
             />
           </Switch>
+          {this.state.update && <button className="edit-button">Update</button>}
         </div>
       </div>
     );

@@ -32,7 +32,9 @@ export default class SolarPvGenerator extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    this.props.update();
   };
+
   render() {
     return (
       <div className="solar-pv-generator">
