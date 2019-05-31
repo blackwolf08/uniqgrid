@@ -18,7 +18,8 @@ class MyDevice extends Component {
     keys: [],
     selectValue: "Select Device",
     graphData: "",
-    startTime: Date.now() - 604800000
+    startTime: Date.now() - 604800000,
+    default: true
   };
 
   handleClick = deviceId => {
@@ -42,7 +43,8 @@ class MyDevice extends Component {
   };
   handleChange = e => {
     this.setState({
-      isLoading: true
+      isLoading: true,
+      default: false
     });
     this.setState({ selectValue: e.target.value });
     let endtime = Date.now();
@@ -219,6 +221,7 @@ class MyDevice extends Component {
                 onChange={this.handleChange}
                 className="key-select"
               >
+                <option defaultValue>Select</option>
                 {listOfKeys}
               </select>
               <button className="filter-button" onClick={this.filterWeek}>
