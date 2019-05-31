@@ -10,14 +10,28 @@ class AddressDetails extends Component {
     pincode: "-",
     state: "-",
     street: "-",
-    isLoading: true
+    isLoading: true,
+    name: ""
   };
 
   componentWillReceiveProps() {
+    //console.log("im mounted");
     this.setState({
       isLoading: true
     });
-
+    this.setState({
+      data: this.props.info
+    });
+    let name = "";
+    Object.keys(this.state.data).forEach(key => {
+      if (key.indexOf("connection") === 12) {
+        //console.log(key.indexOf("connection"));
+        name = this.state.data[key].value.toString();
+      }
+    });
+    this.setState({
+      name
+    });
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("city") === 0) {
         // if (this.props.data[key].value.toString() === this.state.city) {

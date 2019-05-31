@@ -22,10 +22,6 @@ class ConnectionInfo extends Component {
     update: false
   };
 
-  componentDidUpdate() {
-    //console.log("up");
-  }
-
   componentDidMount() {
     let url = window.location.href;
     url.split("/");
@@ -55,7 +51,6 @@ class ConnectionInfo extends Component {
         tab1: " connection-info-border"
       });
     }
-
     const {
       match: { params }
     } = this.props;
@@ -71,7 +66,6 @@ class ConnectionInfo extends Component {
         let name = "";
         Object.keys(this.state.data).forEach(key => {
           if (key.indexOf("connection") === 12) {
-            //console.log(key.indexOf("connection"));
             name = this.state.data[key].value.toString();
           }
         });

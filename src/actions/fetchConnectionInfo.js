@@ -10,6 +10,7 @@ export const fetchConnetionInfo = id => dispatch => {
       axios.get(URL).then(res => {
         const properties = res.data.properties;
         let arrayOfStrings = [];
+        console.log("from action");
         Object.keys(properties).forEach(key => {
           arrayOfStrings.push(key);
         });
@@ -30,13 +31,14 @@ export const fetchConnetionInfo = id => dispatch => {
           type: FETCH_CONNECTION_INFO,
           payload: resultObject
         });
+        resolve(true);
       });
-      resolve(true);
     } else {
       const URL =
         "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
 
       axios.get(URL).then(res => {
+        console.log(res);
         const properties = res.data.properties;
         let arrayOfStrings = [];
         Object.keys(properties).forEach(key => {
@@ -59,8 +61,8 @@ export const fetchConnetionInfo = id => dispatch => {
           type: FETCH_CONNECTION_INFO,
           payload: resultObject
         });
+        resolve(true);
       });
-      resolve(true);
     }
   });
 };

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class ConnectionDetails extends Component {
+class ConnectionDetails extends Component {
   state = {
     connectionName: "-",
     connectedLoad: "-",
@@ -10,11 +11,10 @@ export default class ConnectionDetails extends Component {
     elecQuality: ""
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps() {
     this.setState({
       isLoading: true
     });
-
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("connected") === 0) {
         this.setState({
@@ -135,3 +135,9 @@ export default class ConnectionDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  info: state.connectionInfo.data
+});
+
+export default connect(mapStateToProps)(ConnectionDetails);
