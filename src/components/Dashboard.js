@@ -26,7 +26,6 @@ class Dashboard extends Component {
         </div>
       );
     }
-
     return (
       <div>
         <NavBar />

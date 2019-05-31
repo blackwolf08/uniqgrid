@@ -1,6 +1,5 @@
 import { apiCall, setTokenHeader } from "../services/api";
 import { SET_CURRENT_USER, ERROR } from "../actions/types";
-
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
@@ -28,11 +27,13 @@ export function authUser(type, userData) {
         "http://portal.uniqgridcloud.com:8080/api/auth/login",
         userData
       )
-        .then(async ({ token, ...user }) => {
-          
-          localStorage.setItem("jwtToken", token);
-          setAuthorizationToken(token);
-          dispatch(setCurrentUser(user));
+        .then(async res => {
+          localStorage.setItem("email", userData.username);
+          localStorage.setItem("password", userData.password);
+          localStorage.setItem("jwtToken", res.token);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          setAuthorizationToken(res.token);
+          dispatch(setCurrentUser(res.token));
           resolve();
         })
         .catch(err => {
@@ -44,3 +45,30 @@ export function authUser(type, userData) {
     });
   };
 }
+
+const userEmail = localStorage.email;
+const userPassword = localStorage.password;
+const refreshData = {
+  username: userEmail,
+  password: userPassword
+};
+
+export const refreshUser = () => {
+  ff();
+};
+
+const ff = () => {
+  console.log("hi");
+  apiCall(
+    "post",
+    "http://portal.uniqgridcloud.com:8080/api/auth/login",
+    refreshData
+  )
+    .then(async res => {
+      localStorage.setItem("userData", res);
+      localStorage.setItem("jwtToken", res.token);
+      localStorage.setItem("refreshToken", res.refreshToken);
+      setAuthorizationToken(res.token);
+    })
+    .catch(err => {});
+};

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { setAuthorizationToken, setCurrentUser } from "./actions/auth";
 import Login from "./components/Login";
+import { refreshUser } from "./actions/auth";
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
@@ -14,6 +15,11 @@ if (localStorage.jwtToken) {
     store.dispatch(setCurrentUser({}));
   }
 }
+
+setInterval(() => {
+  console.log("ji");
+  refreshUser();
+}, 600000);
 
 function App() {
   return (
