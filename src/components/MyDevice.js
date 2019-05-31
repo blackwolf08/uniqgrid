@@ -16,8 +16,9 @@ class MyDevice extends Component {
     deviceId: "",
     isLoading: false,
     keys: [],
-    selectValue: "Select Keys",
-    graphData: ""
+    selectValue: "Select Device",
+    graphData: "",
+    startTime: Date.now() - 604800000
   };
 
   handleClick = deviceId => {
@@ -34,7 +35,7 @@ class MyDevice extends Component {
         .then(res => {
           this.setState({
             keys: res.data,
-            isLoading: false,
+            isLoading: false
           });
         });
     });
@@ -44,25 +45,24 @@ class MyDevice extends Component {
       isLoading: true
     });
     this.setState({ selectValue: e.target.value });
-    setTimeout(() => {
-      let endtime = Date.now();
-      axios
-        .get(
-          `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
-            this.state.deviceId
-          }/values/timeseries?limit=100&agg=NONE&keys=${
-            this.state.selectValue
-          }&startTs=1554396240000&endTs=${endtime}`
-        )
-        .then(res => {
-          let a = res.data;
-          let s = a[Object.keys(a)[0]];
-          this.setState({
-            isLoading: false,
-            graphData: s
-          });
+    let endtime = Date.now();
+    let startTime = this.state.startTime;
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          this.state.deviceId
+        }/values/timeseries?limit=100&agg=NONE&keys=${
+          this.state.selectValue
+        }&startTs=${startTime}&endTs=${endtime}`
+      )
+      .then(res => {
+        let a = res.data;
+        let s = a[Object.keys(a)[0]];
+        this.setState({
+          isLoading: false,
+          graphData: s
         });
-    }, 0);
+      });
   };
 
   setOptions = () => {
@@ -87,6 +87,86 @@ class MyDevice extends Component {
     return options;
   };
 
+  filterWeek = () => {
+    let startTime = Date.now() - 604800000;
+    this.setState({
+      startTime
+    });
+    this.setState({
+      isLoading: true
+    });
+    let endtime = Date.now();
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          this.state.deviceId
+        }/values/timeseries?limit=100&agg=NONE&keys=${
+          this.state.selectValue
+        }&startTs=${startTime}&endTs=${endtime}`
+      )
+      .then(res => {
+        let a = res.data;
+        let s = a[Object.keys(a)[0]];
+        this.setState({
+          isLoading: false,
+          graphData: s
+        });
+      });
+  };
+
+  filterMonth = () => {
+    let startTime = Date.now() - 2628000000;
+    this.setState({
+      startTime
+    });
+    this.setState({
+      isLoading: true
+    });
+    let endtime = Date.now();
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          this.state.deviceId
+        }/values/timeseries?limit=100&agg=NONE&keys=${
+          this.state.selectValue
+        }&startTs=${startTime}&endTs=${endtime}`
+      )
+      .then(res => {
+        let a = res.data;
+        let s = a[Object.keys(a)[0]];
+        this.setState({
+          isLoading: false,
+          graphData: s
+        });
+      });
+  };
+
+  filterYear = () => {
+    let startTime = Date.now() - 959220000000;
+    this.setState({
+      startTime
+    });
+    this.setState({
+      isLoading: true
+    });
+    let endtime = Date.now();
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          this.state.deviceId
+        }/values/timeseries?limit=100&agg=NONE&keys=${
+          this.state.selectValue
+        }&startTs=${startTime}&endTs=${endtime}`
+      )
+      .then(res => {
+        let a = res.data;
+        let s = a[Object.keys(a)[0]];
+        this.setState({
+          isLoading: false,
+          graphData: s
+        });
+      });
+  };
 
   dataPoints = () => {
     let s = this.state.graphData.map(e => {
@@ -116,10 +196,12 @@ class MyDevice extends Component {
       let keyArray = keyValue.split("_");
       keyArray = keyArray.join(" ");
       return (
-          <option key={uuid.v4()} value={key}>{keyArray}</option>
+        <option key={uuid.v4()} value={key}>
+          {keyArray}
+        </option>
       );
     });
-
+    console.log(this.props.connectionName);
     return (
       <div>
         <Helmet>
@@ -131,29 +213,43 @@ class MyDevice extends Component {
           </h1>
           {listOfConnections}
           <div className="my-device-graph">
-            {this.state.deviceId && !this.state.isLoading && (
+            <div>
+              <select
+                value={this.state.selectValue}
+                onChange={this.handleChange}
+                className="key-select"
+              >
+                {listOfKeys}
+              </select>
+              <button className="filter-button" onClick={this.filterWeek}>
+                Week
+              </button>
+              <button className="filter-button" onClick={this.filterMonth}>
+                Month
+              </button>
+              <button className="filter-button" onClick={this.filterYear}>
+                Year
+              </button>
+              {/* <p>{this.state.graphData}</p> */}
               <div>
-                <select
-                  value={this.state.selectValue}
-                  onChange={this.handleChange}
-                  className="key-select"
-                >
-                  {listOfKeys}
-                </select>
-                {/* <p>{this.state.graphData}</p> */}
-                <div>
-                  {this.state.graphData &&
-                    this.state.graphData.length === 0 && <h4>No Data</h4>}
-                  {this.state.graphData && this.state.graphData.length > 1 && (
+                {this.state.graphData && this.state.graphData.length === 0 && (
+                  <h4>No Data</h4>
+                )}
+                {this.state.isLoading && (
+                  <div style={{ height: "400px" }}>
+                    <Spinner />
+                  </div>
+                )}
+                {this.state.graphData &&
+                  this.state.graphData.length > 1 &&
+                  !this.state.isLoading && (
                     <CanvasJSChart
                       options={this.setOptions()}
                       /* onRef = {ref => this.chart = ref} */
                     />
                   )}
-                </div>
               </div>
-            )}
-            {this.state.isLoading && <Spinner />}
+            </div>
           </div>
         </div>
       </div>
@@ -162,7 +258,8 @@ class MyDevice extends Component {
 }
 
 const mapSateToProps = state => ({
-  devices: state.userdata.data
+  devices: state.userdata.data,
+  connectionName: state.connectionInfo.data
 });
 
 export default connect(mapSateToProps)(MyDevice);

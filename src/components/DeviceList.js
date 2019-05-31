@@ -12,7 +12,6 @@ class DeviceList extends Component {
   };
 
   render() {
-    const { name } = this.props;
     const deviceList = this.state.devices.map(device => {
       // let d  = new Date(0);
       // console.log(d)
@@ -24,7 +23,6 @@ class DeviceList extends Component {
           key={device.id.id}
           style={{
             display: "flex",
-            border: "1px solid grey",
             paddingLeft: "10px",
             paddingTop: "10px",
             cursor: "pointer"
@@ -50,12 +48,7 @@ class DeviceList extends Component {
       );
     });
 
-    return (
-      <div className="mydevice-list">
-        <h4>Connection name {name}</h4>
-        {deviceList}
-      </div>
-    );
+    return <div className="mydevice-list">{deviceList}</div>;
   }
 }
 

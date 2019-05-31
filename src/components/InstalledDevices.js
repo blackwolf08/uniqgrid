@@ -1,13 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class InstalledDevices extends Component {
-    render() {
-        return (
-            <div className="installed-devices">
-                <button className="installed-device-buttons">gridx-0005 <i className="fas fa-times" style={{color:'grey'}}></i></button>
-                <button className="installed-device-buttons">nodex-0005 <i className="fas fa-times" style={{color:'grey'}}></i></button>
-                <button className="installed-device-buttons">nodex-0006 <i className="fas fa-times" style={{color:'grey'}}></i></button>
-            </div>
-        )
-    }
+class InstalledDevices extends Component {
+  render() {
+    const listOfDevices = this.props.devices.map(device => {
+      return (
+        <>
+          <button className="installed-device-buttons">
+            {device.name}{" "}
+            <i className="fas fa-times" style={{ color: "grey" }} />
+          </button>
+        </>
+      );
+    });
+    //console.log(this.props.devices);
+
+    return <div className="installed-devices">{listOfDevices}</div>;
+  }
 }
+
+const mapSateToProps = state => ({
+  devices: state.userdata.data
+});
+
+export default connect(mapSateToProps)(InstalledDevices);
