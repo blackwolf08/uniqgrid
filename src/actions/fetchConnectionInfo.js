@@ -38,7 +38,6 @@ export const fetchConnetionInfo = id => dispatch => {
         "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
 
       axios.get(URL).then(res => {
-        console.log(res);
         const properties = res.data.properties;
         let arrayOfStrings = [];
         Object.keys(properties).forEach(key => {

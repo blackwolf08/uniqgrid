@@ -18,7 +18,7 @@ class MyDevice extends Component {
     keys: [],
     selectValue: "Select Device",
     graphData: "",
-    startTime: Date.now() - 604800000,
+    startTime: Date.now() - 86400000,
     default: true
   };
 
@@ -175,6 +175,34 @@ class MyDevice extends Component {
       });
   };
 
+  filterDay = () => {
+    let startTime = Date.now() - 86400000;
+    this.setState({
+      startTime
+    });
+    this.setState({
+      isLoading: true
+    });
+    let endtime = Date.now();
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+          this.state.deviceId
+        }/values/timeseries?limit=100&agg=NONE&keys=${
+          this.state.selectValue
+        }&startTs=${startTime}&endTs=${endtime}`
+      )
+      .then(res => {
+        console.log(res);
+        let a = res.data;
+        let s = a[Object.keys(a)[0]];
+        this.setState({
+          isLoading: false,
+          graphData: s
+        });
+      });
+  };
+
   dataPoints = () => {
     let s = this.state.graphData.map(e => {
       let date = new Date(e.ts).toUTCString().split(" ");
@@ -228,6 +256,9 @@ class MyDevice extends Component {
                 <option defaultValue>Select</option>
                 {listOfKeys}
               </select>
+              <button className="filter-button" onClick={this.filterDay}>
+                Day
+              </button>
               <button className="filter-button" onClick={this.filterWeek}>
                 Week
               </button>
