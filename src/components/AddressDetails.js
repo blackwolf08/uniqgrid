@@ -50,9 +50,9 @@ class AddressDetails extends Component {
           state: this.props.data[key].value.toString()
         });
       }
-      if (key.indexOf("pincode") === 0) {
+      if (key.indexOf("postal") === 0) {
         this.setState({
-          state: this.props.data[key].value.toString()
+          pincode: this.props.data[key].value.toString()
         });
       }
     });
