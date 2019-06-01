@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Connection from "./Connection";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import icon1 from "../images/icon1.png";
+import icon2 from "../images/icon2.png";
 
 export default class MySite extends Component {
   state = {
@@ -56,7 +58,26 @@ export default class MySite extends Component {
           <title>My Site</title>
         </Helmet>
         <h1 className="mysites-heading">My Sites</h1>
-        <div className="mysites-connection-list">{list}</div>
+        <div className="mysites-connection-list">
+          <div className="mysites-connections" onClick={this.handleClick}>
+            <div className="my-col">
+              <p>{}</p>
+            </div>
+            <div className="my-col">
+              <img className="mysite-icons1" src={icon1} alt="power" />
+            </div>
+            <div className="my-col">
+              <img className="mysite-icons2" src={icon2} alt="charge" />
+            </div>
+            <div
+              className="my-col mysites-icons"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
+              <p />
+            </div>
+          </div>
+          {list}
+        </div>
       </div>
     );
   }

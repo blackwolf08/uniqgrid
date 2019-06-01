@@ -19,13 +19,16 @@ class MyDevice extends Component {
     selectValue: "Select Device",
     graphData: "",
     startTime: Date.now() - 86400000,
-    default: true
+    default: true,
+    deviceActivated: false
   };
 
-  handleClick = deviceId => {
+  handleClick = (deviceId, name) => {
     this.setState({
       deviceId,
-      isLoading: true
+      isLoading: true,
+      deviceActivated: true,
+      deviceName: name
     });
     const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
     // let config = {
@@ -247,47 +250,51 @@ class MyDevice extends Component {
           </h1>
           {listOfConnections}
           <div className="my-device-graph">
-            <div>
-              <select
-                value={this.state.selectValue}
-                onChange={this.handleChange}
-                className="key-select"
-              >
-                <option defaultValue>Select</option>
-                {listOfKeys}
-              </select>
-              <button className="filter-button" onClick={this.filterDay}>
-                Day
-              </button>
-              <button className="filter-button" onClick={this.filterWeek}>
-                Week
-              </button>
-              <button className="filter-button" onClick={this.filterMonth}>
-                Month
-              </button>
-              <button className="filter-button" onClick={this.filterYear}>
-                Year
-              </button>
-              {/* <p>{this.state.graphData}</p> */}
+            {this.state.deviceActivated && (
               <div>
-                {this.state.graphData && this.state.graphData.length === 0 && (
-                  <h4>No Data</h4>
-                )}
-                {this.state.isLoading && (
-                  <div style={{ height: "400px" }}>
-                    <Spinner />
-                  </div>
-                )}
-                {this.state.graphData &&
-                  this.state.graphData.length > 1 &&
-                  !this.state.isLoading && (
-                    <CanvasJSChart
-                      options={this.setOptions()}
-                      /* onRef = {ref => this.chart = ref} */
-                    />
+                <h4 style={{ width: "100%", textAlign: "center" }}>
+                  {this.state.deviceName}
+                </h4>
+                <select
+                  value={this.state.selectValue}
+                  onChange={this.handleChange}
+                  className="key-select"
+                >
+                  <option defaultValue>Select</option>
+                  {listOfKeys}
+                </select>
+                <button className="filter-button" onClick={this.filterDay}>
+                  Day
+                </button>
+                <button className="filter-button" onClick={this.filterWeek}>
+                  Week
+                </button>
+                <button className="filter-button" onClick={this.filterMonth}>
+                  Month
+                </button>
+                <button className="filter-button" onClick={this.filterYear}>
+                  Year
+                </button>
+                {/* <p>{this.state.graphData}</p> */}
+                <div>
+                  {this.state.graphData &&
+                    this.state.graphData.length === 0 && <h4>No Data</h4>}
+                  {this.state.isLoading && (
+                    <div style={{ height: "400px" }}>
+                      <Spinner />
+                    </div>
                   )}
+                  {this.state.graphData &&
+                    this.state.graphData.length > 1 &&
+                    !this.state.isLoading && (
+                      <CanvasJSChart
+                        options={this.setOptions()}
+                        /* onRef = {ref => this.chart = ref} */
+                      />
+                    )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

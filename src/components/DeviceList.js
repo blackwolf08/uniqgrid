@@ -4,20 +4,19 @@ import { connect } from "react-redux";
 class DeviceList extends Component {
   state = {
     //Device list for current connection
-    devices: this.props.devices
+    devices: this.props.devices,
+    selected: ""
   };
 
   handleClick = e => {
-    this.props.handleMethod(e);
+    this.setState({
+      selected: "#eee"
+    });
+    this.props.handleMethod(e.id.id, e.name);
   };
 
   render() {
     const deviceList = this.state.devices.map(device => {
-      // let d  = new Date(0);
-      // console.log(d)
-      // let s = d.setUTCSeconds(device.createdTime).toString();
-      // let date = s.toUTCString();
-      // console.log(d)
       return (
         <div
           key={device.id.id}
@@ -27,9 +26,9 @@ class DeviceList extends Component {
             paddingTop: "10px",
             cursor: "pointer"
           }}
-          className="device-list"
+          className={"device-list " + this.state.selected}
           onClick={() => {
-            this.handleClick(device.id.id);
+            this.handleClick(device);
           }}
         >
           <div className="my-col bold">
