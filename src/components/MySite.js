@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import icon1 from "../images/icon1.png";
 import icon2 from "../images/icon2.png";
+import jwtDecode from "jwt-decode";
 
 export default class MySite extends Component {
   state = {
@@ -14,8 +15,11 @@ export default class MySite extends Component {
   };
 
   componentWillMount() {
-    const URL =
-      "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
+    let jwt = localStorage.jwtToken;
+    jwt = jwtDecode(jwt);
+    const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/${
+      jwt.sub
+    }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
 
     axios.get(URL).then(res => {
       const properties = res.data.properties;

@@ -19,7 +19,8 @@ class ConnectionInfo extends Component {
     tab5: "",
     data: {},
     name: "",
-    update: false
+    update: false,
+    defaultName: "Connection Name"
   };
 
   componentDidMount() {
@@ -82,9 +83,11 @@ class ConnectionInfo extends Component {
     return (
       <div className="view">
         <Helmet>
-          <title>{`${this.state.name}`}</title>
+          <title>{`${this.state.name || this.state.defaultName}`}</title>
         </Helmet>
-        <h1 className="mysites-heading">{this.state.name}</h1>
+        <h1 className="mysites-heading">
+          {this.state.name || this.state.defaultName}
+        </h1>
         <div className="connection-info-hero">
           <div className="connection-info-tabs" style={{ cursor: "pointer" }}>
             <div className={"mycol-5" + this.state.tab1}>
