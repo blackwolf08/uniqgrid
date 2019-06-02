@@ -11,7 +11,8 @@ export default class MySite extends Component {
     maxConnections: 0,
     kWASite: {},
     properties: {},
-    ready: false
+    ready: false,
+    nameOfSites: []
   };
 
   componentWillMount() {
@@ -22,6 +23,7 @@ export default class MySite extends Component {
     }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
 
     axios.get(URL).then(res => {
+      console.log(res);
       const properties = res.data.properties;
       let arrayOfStrings = [];
       let noOfSites = [];
@@ -31,10 +33,23 @@ export default class MySite extends Component {
 
       arrayOfStrings.forEach(site => {
         let nanCheck = isNaN(parseInt(site.charAt(site.length - 2), 10));
-        if (site.search("site") && !nanCheck) {
+        if (site.search("site") >= 0 && !nanCheck) {
           noOfSites.push(parseInt(site.charAt(site.length - 2), 10));
         }
       });
+      let nameOfSites = [];
+      arrayOfStrings.forEach(site => {
+        if (site.search("electricity_connection_name") >= 0) {
+          nameOfSites.push(res.data.properties[site].value);
+        }
+      });
+      this.setState({
+        nameOfSites: nameOfSites
+      });
+
+      if (noOfSites.length === 0) {
+        noOfSites.push(1);
+      }
 
       arrayOfStrings.sort();
       this.setState({
@@ -44,6 +59,8 @@ export default class MySite extends Component {
       let kWASite = [];
       arrayOfStrings.forEach(site => {
         if (site.search("connected_load_kw_site") >= 0) {
+          kWASite.push(site);
+        } else if (site.search("connected_load_kw") >= 0) {
           kWASite.push(site);
         }
       });
@@ -68,22 +85,42 @@ export default class MySite extends Component {
     for (let i = 1; i <= this.state.maxConnections; i++) {
       let j = i - 1;
       if (j === this.state.maxConnections - 1) {
-        j = 2;
+        j = this.state.maxConnections - 1;
       }
-      console.log();
-      list.push(
-        <Connection
-          key={i}
-          id={i}
-          name={`Site ${i}`}
-          power={`${this.state.properties[this.state.kWASite[j]].value} kW`}
-          powerPer={`55%`}
-          consumption={`${
-            this.state.properties[this.state.kWASite[j]].value
-          } kW`}
-          consumptionPer={`100%`}
-        />
+
+      console.log(
+        typeof this.state.properties[this.state.kWASite[j]],
+        this.state.kWASite[j]
       );
+      if (typeof this.state.properties[this.state.kWASite[j]] === "undefined") {
+        list.push(
+          <Connection
+            key={i}
+            id={i}
+            name={`${this.state.nameOfSites[i]}`}
+            power={`
+              - kW`}
+            powerPer={`55%`}
+            consumption={`
+              - kW`}
+            consumptionPer={`100%`}
+          />
+        );
+      } else {
+        list.push(
+          <Connection
+            key={i}
+            id={i}
+            name={`${this.state.nameOfSites[j]}`}
+            power={`${this.state.properties[this.state.kWASite[j]].value} kW`}
+            powerPer={`55%`}
+            consumption={`${
+              this.state.properties[this.state.kWASite[j]].value
+            } kW`}
+            consumptionPer={`100%`}
+          />
+        );
+      }
     }
 
     return (

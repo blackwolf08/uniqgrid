@@ -1,11 +1,15 @@
 import axios from "axios";
 import { FETCH_CONNECTION_INFO } from "./types";
+import jwtDecode from "jwt-decode";
 
 export const fetchConnetionInfo = id => dispatch => {
   return new Promise((resolve, reject) => {
     if (id > 1) {
-      const URL =
-        "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
+      let jwt = localStorage.jwtToken;
+      jwt = jwtDecode(jwt);
+      const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/${
+        jwt.sub
+      }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
 
       axios.get(URL).then(res => {
         const properties = res.data.properties;
@@ -34,8 +38,11 @@ export const fetchConnetionInfo = id => dispatch => {
         resolve(true);
       });
     } else {
-      const URL =
-        "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
+      let jwt = localStorage.jwtToken;
+      jwt = jwtDecode(jwt);
+      const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/${
+        jwt.sub
+      }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
 
       axios.get(URL).then(res => {
         const properties = res.data.properties;
