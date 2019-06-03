@@ -11,7 +11,7 @@ class ConnectionDetails extends Component {
     elecQuality: ""
   };
 
-  componentWillReceiveProps() {
+  componentDidMount() {
     this.setState({
       isLoading: true
     });

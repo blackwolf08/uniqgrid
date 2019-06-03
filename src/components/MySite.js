@@ -23,7 +23,6 @@ export default class MySite extends Component {
     }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
 
     axios.get(URL).then(res => {
-      console.log(res);
       const properties = res.data.properties;
       let arrayOfStrings = [];
       let noOfSites = [];
@@ -38,6 +37,7 @@ export default class MySite extends Component {
         }
       });
       let nameOfSites = [];
+      arrayOfStrings.sort();
       arrayOfStrings.forEach(site => {
         if (site.search("electricity_connection_name") >= 0) {
           nameOfSites.push(res.data.properties[site].value);
@@ -67,9 +67,7 @@ export default class MySite extends Component {
       this.setState({
         kWASite
       });
-      for (let i = 0; i < 10; i++) {
-        console.log();
-      }
+
       noOfSites.sort();
       this.setState({
         maxConnections: noOfSites[noOfSites.length - 1]
@@ -88,10 +86,6 @@ export default class MySite extends Component {
         j = this.state.maxConnections - 1;
       }
 
-      console.log(
-        typeof this.state.properties[this.state.kWASite[j]],
-        this.state.kWASite[j]
-      );
       if (typeof this.state.properties[this.state.kWASite[j]] === "undefined") {
         list.push(
           <Connection

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import uuid from "uuid";
 
 class InstalledDevices extends Component {
   render() {
     const listOfDevices = this.props.devices.map(device => {
       return (
         <>
-          <button className="installed-device-buttons">
+          <button key={uuid.v4()} className="installed-device-buttons">
             {device.name}{" "}
             <i className="fas fa-times" style={{ color: "grey" }} />
           </button>

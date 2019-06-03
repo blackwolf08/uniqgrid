@@ -14,10 +14,9 @@ class AddressDetails extends Component {
     name: ""
   };
 
-  componentWillReceiveProps() {
-    //console.log("im mounted");
+  componentDidMount() {
     this.setState({
-      isLoading: true
+      isLoading: true //here
     });
     this.setState({
       data: this.props.info
@@ -25,13 +24,13 @@ class AddressDetails extends Component {
     let name = "";
     Object.keys(this.state.data).forEach(key => {
       if (key.indexOf("connection") === 12) {
-        //console.log(key.indexOf("connection"));
         name = this.state.data[key].value.toString();
       }
     });
     this.setState({
       name
     });
+    console.log(this.props.data);
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("city") === 0) {
         // if (this.props.data[key].value.toString() === this.state.city) {

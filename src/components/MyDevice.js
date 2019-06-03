@@ -72,6 +72,13 @@ class MyDevice extends Component {
           isLoading: false,
           graphData: s
         });
+        if (typeof a[Object.keys(a)[0]] === "undefined") {
+          console.log(s);
+          this.setState({
+            isLoading: false,
+            graphData: ""
+          });
+        }
       });
   };
 

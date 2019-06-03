@@ -14,7 +14,7 @@ export default class Connection extends Component {
       consumptionPer
     } = this.props;
 
-    const redirect = `/dashboard/my-sites/${id}/address-details`;
+    const redirect = `/dashboard/my-sites/${id}`;
     return (
       <Link to={redirect}>
         <div className="mysites-connections" onClick={this.handleClick}>

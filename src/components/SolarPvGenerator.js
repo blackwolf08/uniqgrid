@@ -6,7 +6,7 @@ export default class SolarPvGenerator extends Component {
     interested: true
   };
 
-  componentWillReceiveProps() {
+  componentDidMount() {
     this.setState({
       isLoading: true
     });
@@ -35,6 +35,12 @@ export default class SolarPvGenerator extends Component {
     this.props.update();
   };
 
+  handleCheckboxInput = () => {
+    this.setState({
+      interested: !this.state.interested
+    });
+  };
+
   render() {
     return (
       <div className="solar-pv-generator">
@@ -51,7 +57,11 @@ export default class SolarPvGenerator extends Component {
           </div>
           <div className="solar-pv-generator-box-right">
             <label className="my-container">
-              <input type="checkbox" checked={this.state.interested} />
+              <input
+                type="checkbox"
+                onChange={this.handleCheckboxInput}
+                checked={this.state.interested}
+              />
               <span className="my-checkmark" />
             </label>
           </div>

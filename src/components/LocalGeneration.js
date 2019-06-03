@@ -8,7 +8,7 @@ export default class LocalGeneration extends Component {
     monthlyRunningCost: ""
   };
 
-  componentWillReceiveProps() {
+  componentDidMount() {
     this.setState({
       isLoading: true
     });
