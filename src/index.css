@@ -596,12 +596,11 @@ input:focus {
   margin-top: -10px;
 }
 
-@media only screen and (max-width: 600px) {
-  .left-part {
-    display: none;
-  }
-  .view {
-    left: 0;
-    width: 100%;
-  }
+.update-button {
+  padding: 1rem;
+  width: 100px;
+  position: absolute;
+  right: 0;
+  bottom: 100px;
+  transform: translate(-50%, 0);
 }

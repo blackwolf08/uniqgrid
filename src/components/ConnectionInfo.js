@@ -102,6 +102,20 @@ class ConnectionInfo extends Component {
     }
   };
 
+  handleUpdateButtonClick = value => {
+    if (value === 1) {
+      this.handleTabChange("connection-details");
+    } else if (value === 2) {
+      this.handleTabChange("local-generation");
+    } else if (value === 3) {
+      this.handleTabChange("solar-pv-generator");
+    } else if (value === 4) {
+      this.handleTabChange("installed-devices");
+    } else if (value === 5) {
+      // this.handleTabChange(1);
+    }
+  };
+
   render() {
     return (
       <div className="view">
@@ -155,19 +169,69 @@ class ConnectionInfo extends Component {
             </div>
           </div>
           {this.state.active === 1 && (
-            <AddressDetails update={this.update} data={this.props.info} />
+            <>
+              <AddressDetails update={this.update} data={this.props.info} />
+              <button
+                className="update-button"
+                onClick={() => {
+                  this.handleUpdateButtonClick(1);
+                }}
+              >
+                Next
+              </button>
+            </>
           )}
           {this.state.active === 2 && (
-            <ConnectionDetails update={this.update} data={this.props.info} />
+            <>
+              <ConnectionDetails update={this.update} data={this.props.info} />
+              <button
+                className="update-button"
+                onClick={() => {
+                  this.handleUpdateButtonClick(2);
+                }}
+              >
+                Next
+              </button>
+            </>
           )}
           {this.state.active === 3 && (
-            <LocalGeneration update={this.update} data={this.props.info} />
+            <>
+              <LocalGeneration update={this.update} data={this.props.info} />
+              <button
+                className="update-button"
+                onClick={() => {
+                  this.handleUpdateButtonClick(3);
+                }}
+              >
+                Next
+              </button>
+            </>
           )}
           {this.state.active === 4 && (
-            <SolarPvGenerator update={this.update} data={this.props.info} />
+            <>
+              <SolarPvGenerator update={this.update} data={this.props.info} />
+              <button
+                className="update-button"
+                onClick={() => {
+                  this.handleUpdateButtonClick(4);
+                }}
+              >
+                Next
+              </button>
+            </>
           )}
           {this.state.active === 5 && (
-            <InstalledDevices update={this.update} data={this.props.info} />
+            <>
+              <InstalledDevices update={this.update} data={this.props.info} />
+              <button
+                className="update-button"
+                onClick={() => {
+                  this.handleUpdateButtonClick(5);
+                }}
+              >
+                Update
+              </button>
+            </>
           )}
           {this.state.update && <button className="edit-button">Update</button>}
         </div>
