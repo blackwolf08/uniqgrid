@@ -7,7 +7,7 @@ import { setAuthorizationToken, setCurrentUser } from "./actions/auth";
 import Login from "./components/Login";
 import { refreshUser } from "./actions/auth";
 
-if (localStorage.jwtToken) {
+if (typeof localStorage.jwtToken !== "undefined") {
   setAuthorizationToken(localStorage.jwtToken);
   try {
     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));

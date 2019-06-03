@@ -3,6 +3,8 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 export const fetchUserData = () => dispatch => {
+  if(typeof localStorage.jwtToken !== "undefined")
+  {
   const jwt = localStorage.jwtToken;
   const user = jwtDecode(localStorage.jwtToken);
   const userId = user.customerId;
@@ -49,5 +51,6 @@ export const fetchUserData = () => dispatch => {
     .catch(error => {
       console.log(error);
     });
+  }
 };
 

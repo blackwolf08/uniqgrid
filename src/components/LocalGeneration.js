@@ -44,6 +44,9 @@ export default class LocalGeneration extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
   };
 
   render() {

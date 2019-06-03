@@ -16,6 +16,8 @@ export default class MySite extends Component {
   };
 
   componentWillMount() {
+    if(typeof localStorage.jwtToken !== "undefined")
+    {
     let jwt = localStorage.jwtToken;
     jwt = jwtDecode(jwt);
     const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/${
@@ -76,6 +78,7 @@ export default class MySite extends Component {
     this.setState({
       ready: true
     });
+  }
   }
 
   render() {

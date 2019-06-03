@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchConnetionInfo } from "../actions/fetchConnectionInfo";
 import Spinner from "../images";
+import csc from 'country-state-city';
+import uuid from 'uuid'
 
 class AddressDetails extends Component {
   state = {
     data: {},
     city: "-",
-    pincode: "-",
+    postal: "-",
     state: "-",
     street: "-",
     isLoading: true,
@@ -30,7 +32,6 @@ class AddressDetails extends Component {
     this.setState({
       name
     });
-    console.log(this.props.data);
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("city") === 0) {
         // if (this.props.data[key].value.toString() === this.state.city) {
@@ -51,7 +52,7 @@ class AddressDetails extends Component {
       }
       if (key.indexOf("postal") === 0) {
         this.setState({
-          pincode: this.props.data[key].value.toString()
+          postal: this.props.data[key].value.toString()
         });
       }
     });
@@ -64,12 +65,23 @@ class AddressDetails extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
   };
 
   render() {
     if (this.state.isLoading) {
       return <Spinner />;
     }
+    const listToRender = []
+    const listOfStates = csc.getStatesOfCountry("101")
+    //console.log(listOfStates)
+    listOfStates.forEach(stateName=>{
+      //console.log(stateName.name)
+       listToRender.push(<option key={uuid.v4()}>{stateName.name}</option>)
+    })
+
 
     return (
       <div className="address-details">
@@ -82,7 +94,9 @@ class AddressDetails extends Component {
                 type="text"
                 value={this.state.street}
                 placeholder={this.state.street}
-                onChange={this.handleChange}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
                 name="street"
               />{" "}
             </div>
@@ -93,9 +107,12 @@ class AddressDetails extends Component {
                 type="text"
                 value={this.state.city}
                 placeholder={this.state.city}
-                onChange={this.handleChange}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
                 name="city"
               />{" "}
+              
             </div>
             <div className="address-details-div ">
               <p>State</p>
@@ -104,19 +121,26 @@ class AddressDetails extends Component {
                 type="text"
                 value={this.state.state}
                 placeholder={this.state.state}
-                onChange={this.handleChange}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
                 name="state"
               />{" "}
+              {/* <select>
+                {listToRender}
+              </select> */}
             </div>
             <div className="address-details-div ">
               <p>Pincode</p>
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.pincode}
-                placeholder={this.state.pincode}
-                onChange={this.handleChange}
-                name="pincode"
+                value={this.state.postal}
+                placeholder={this.state.postal}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
+                name="postal"
               />{" "}
             </div>
           </>

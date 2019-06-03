@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 
 class ConnectionDetails extends Component {
   state = {
-    connectionName: "-",
-    connectedLoad: "-",
+    electricity_connection_name: "-",
+    connected_load_kw: "-",
     segment: "",
-    subSegment: "",
-    avgMonthCost: "",
-    elecQuality: ""
+    sub_segment: "",
+    average_monthly_energy_cost: "",
+    electricity_quality: ""
   };
 
   componentDidMount() {
@@ -18,12 +18,12 @@ class ConnectionDetails extends Component {
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("connected") === 0) {
         this.setState({
-          connectedLoad: this.props.data[key].value.toString()
+          connected_load_kw: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("connection") === 12) {
         this.setState({
-          connectionName: this.props.data[key].value.toString()
+          electricity_connection_name: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("segment") === 0) {
@@ -33,17 +33,17 @@ class ConnectionDetails extends Component {
       }
       if (key.indexOf("sub") === 0) {
         this.setState({
-          subSegment: this.props.data[key].value.toString()
+          sub_segment: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("average") === 0) {
         this.setState({
-          avgMonthCost: this.props.data[key].value.toString()
+          average_monthly_energy_cost: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("quality") === 12) {
         this.setState({
-          elecQuality: this.props.data[key].value.toString()
+          electricity_quality: this.props.data[key].value.toString()
         });
       }
     });
@@ -54,6 +54,9 @@ class ConnectionDetails extends Component {
 
   handleChange = e => {
     this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.props.handleChildrenChange({
       [e.target.name]: e.target.value
     });
   };
@@ -68,10 +71,10 @@ class ConnectionDetails extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.connectionName}
-                placeholder={this.state.connectionName}
+                value={this.state.electricity_connection_name}
+                placeholder={this.state.electricity_connection_name}
                 onChange={this.handleChange}
-                name="connectionName"
+                name="electricity_connection_name"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -79,10 +82,10 @@ class ConnectionDetails extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.connectedLoad}
-                placeholder={this.state.connectedLoad}
+                value={this.state.connected_load_kw}
+                placeholder={this.state.connected_load_kw}
                 onChange={this.handleChange}
-                name="connectedLoad"
+                name="connected_load_kw"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -101,10 +104,10 @@ class ConnectionDetails extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.subSegment}
-                placeholder={this.state.subSegment}
+                value={this.state.sub_segment}
+                placeholder={this.state.sub_segment}
                 onChange={this.handleChange}
-                name="subSegment"
+                name="sub_segment"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -112,10 +115,10 @@ class ConnectionDetails extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.avgMonthCost}
-                placeholder={this.state.avgMonthCost}
+                value={this.state.average_monthly_energy_cost}
+                placeholder={this.state.average_monthly_energy_cost}
                 onChange={this.handleChange}
-                name="avgMonthCost"
+                name="average_monthly_energy_cost"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -123,10 +126,10 @@ class ConnectionDetails extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.elecQuality}
-                placeholder={this.state.elecQuality}
+                value={this.state.electricity_quality}
+                placeholder={this.state.electricity_quality}
                 onChange={this.handleChange}
-                name="elecQuality"
+                name="electricity_quality"
               />{" "}
             </div>
           </>

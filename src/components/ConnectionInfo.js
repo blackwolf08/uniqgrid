@@ -20,7 +20,19 @@ class ConnectionInfo extends Component {
     name: "",
     update: false,
     defaultName: "Connection Name",
-    active: 0
+    active: 0,
+    city: "-",
+    postal: "-",
+    state: "-",
+    street: "-",
+    electricity_connection_name: "-",
+    connected_load_kw: "-",
+    segment: "",
+    sub_segment: "",
+    average_monthly_energy_cost: "",
+    electricity_quality: "",
+    bodyArray: [],
+    finalArray: [],
   };
 
   componentDidMount() {
@@ -36,7 +48,6 @@ class ConnectionInfo extends Component {
         this.setState({
           data: this.props.info
         });
-        console.log(this.props.info);
         let name = "";
         Object.keys(this.state.data).forEach(key => {
           if (key.indexOf("connection") === 12) {
@@ -112,8 +123,62 @@ class ConnectionInfo extends Component {
     } else if (value === 4) {
       this.handleTabChange("installed-devices");
     } else if (value === 5) {
-      // this.handleTabChange(1);
+      let obj = {};
+      let properties = [];
+      let toSend = [];
+      this.state.bodyArray.forEach(object => {
+        Object.keys(object).forEach(key => {
+          obj[key] = object[key];
+        });
+      });
+      Object.keys(obj).forEach(key => {
+        properties.push({ [key]: obj[key] });
+        toSend.push({ property: key, value: obj[key] });
+      });
+      console.log();
+
+      this.setState({
+        finalArray: toSend
+      });
+      fetch(
+        `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/vid/${
+          this.props.vid
+        }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`,
+        {
+          method: "POST",
+          body: `{  "properties": ${JSON.stringify(toSend)}
+                }`
+        }
+      )
+        .then(function(res) {
+         window.location.reload();
+        })
+        .catch(function(res) {
+          console.log(res);
+        });
     }
+  };
+
+  handleChildrenChange = value => {
+    
+    Object.keys(value).forEach(key => {
+      console.log("key", key)
+      console.log(this.props.rawdatamapping)
+      Object.keys(this.props.rawdatamapping).forEach(key2 => {
+        console.log(key2)
+        let regex = new RegExp("^" + key, "i");
+        if (key2.match(regex)) {
+          let objToBePushed = { [key2]: value[key] };
+          console.log(objToBePushed)
+          this.setState({
+            bodyArray: [...this.state.bodyArray, objToBePushed]
+          });
+        }
+      });
+      this.setState({
+        [key]: value[key]
+      });
+    });
   };
 
   render() {
@@ -170,7 +235,11 @@ class ConnectionInfo extends Component {
           </div>
           {this.state.active === 1 && (
             <>
-              <AddressDetails update={this.update} data={this.props.info} />
+              <AddressDetails
+                handleChildrenChange={this.handleChildrenChange}
+                update={this.update}
+                data={this.props.info}
+              />
               <button
                 className="update-button"
                 onClick={() => {
@@ -183,7 +252,11 @@ class ConnectionInfo extends Component {
           )}
           {this.state.active === 2 && (
             <>
-              <ConnectionDetails update={this.update} data={this.props.info} />
+              <ConnectionDetails
+                handleChildrenChange={this.handleChildrenChange}
+                update={this.update}
+                data={this.props.info}
+              />
               <button
                 className="update-button"
                 onClick={() => {
@@ -196,7 +269,11 @@ class ConnectionInfo extends Component {
           )}
           {this.state.active === 3 && (
             <>
-              <LocalGeneration update={this.update} data={this.props.info} />
+              <LocalGeneration
+                handleChildrenChange={this.handleChildrenChange}
+                update={this.update}
+                data={this.props.info}
+              />
               <button
                 className="update-button"
                 onClick={() => {
@@ -209,7 +286,11 @@ class ConnectionInfo extends Component {
           )}
           {this.state.active === 4 && (
             <>
-              <SolarPvGenerator update={this.update} data={this.props.info} />
+              <SolarPvGenerator
+                handleChildrenChange={this.handleChildrenChange}
+                update={this.update}
+                data={this.props.info}
+              />
               <button
                 className="update-button"
                 onClick={() => {
@@ -222,7 +303,11 @@ class ConnectionInfo extends Component {
           )}
           {this.state.active === 5 && (
             <>
-              <InstalledDevices update={this.update} data={this.props.info} />
+              <InstalledDevices
+                handleChildrenChange={this.handleChildrenChange}
+                update={this.update}
+                data={this.props.info}
+              />
               <button
                 className="update-button"
                 onClick={() => {
@@ -241,7 +326,9 @@ class ConnectionInfo extends Component {
 }
 
 const mapStateToProps = state => ({
-  info: state.connectionInfo.data
+  info: state.connectionInfo.data,
+  rawdatamapping: state.userdata.rawdatamapping,
+  vid: state.userdata.vid
 });
 
 export default connect(
