@@ -20,7 +20,11 @@ class MyDevice extends Component {
     graphData: "",
     startTime: Date.now() - 86400000,
     default: true,
-    deviceActivated: false
+    deviceActivated: false,
+    day : " active-filter",
+    week : "",
+    month : "",
+    year : ""
   };
 
   handleClick = (deviceId, name) => {
@@ -31,11 +35,6 @@ class MyDevice extends Component {
       deviceName: name
     });
     const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
-    // let config = {
-    //   headers: {
-    //     Authorization: "Bearer " + localStorage.jwtToken
-    //   }
-    // };
     axios.get(URL).then(res => {
       axios
         .get(
@@ -129,6 +128,12 @@ class MyDevice extends Component {
           graphData: s
         });
       });
+      this.setState({
+        day : "",
+        week : " active-filter",
+        month : "",
+        year : ""
+      })
   };
 
   filterMonth = () => {
@@ -156,6 +161,12 @@ class MyDevice extends Component {
           graphData: s
         });
       });
+      this.setState({
+        day : "",
+        week : "",
+        month : " active-filter",
+        year : ""
+      })
   };
 
   filterYear = () => {
@@ -183,6 +194,12 @@ class MyDevice extends Component {
           graphData: s
         });
       });
+      this.setState({
+        day : "",
+        week : "",
+        month : "",
+        year : " active-filter"
+      })
   };
 
   filterDay = () => {
@@ -200,7 +217,7 @@ class MyDevice extends Component {
           this.state.deviceId
         }/values/timeseries?limit=100&agg=NONE&keys=${
           this.state.selectValue
-        }&startTs=${startTime}&endTs=${endtime}`
+        }&startTs=${this.state.startTime}&endTs=${endtime}`
       )
       .then(res => {
         console.log(res);
@@ -211,13 +228,19 @@ class MyDevice extends Component {
           graphData: s
         });
       });
+      this.setState({
+        day : " active-filter",
+        week : "",
+        month : "",
+        year : ""
+      })
   };
 
   dataPoints = () => {
     let s = this.state.graphData.map(e => {
       let date = new Date(e.ts).toUTCString().split(" ");
       return {
-        label: date[0] + date[1] + date[2] + date[3],
+        label: date[1] + " " + date[2],
         y: e.value * 1
       };
     });
@@ -270,16 +293,16 @@ class MyDevice extends Component {
                   <option defaultValue>Select</option>
                   {listOfKeys}
                 </select>
-                <button className="filter-button" onClick={this.filterDay}>
+                <button className={"filter-button" + this.state.day} onClick={this.filterDay}>
                   Day
                 </button>
-                <button className="filter-button" onClick={this.filterWeek}>
+                <button className={"filter-button" + this.state.week} onClick={this.filterWeek}>
                   Week
                 </button>
-                <button className="filter-button" onClick={this.filterMonth}>
+                <button className={"filter-button" + this.state.month} onClick={this.filterMonth}>
                   Month
                 </button>
-                <button className="filter-button" onClick={this.filterYear}>
+                <button className={"filter-button" + this.state.year} onClick={this.filterYear}>
                   Year
                 </button>
                 {/* <p>{this.state.graphData}</p> */}

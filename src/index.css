@@ -547,6 +547,17 @@ i {
   padding: 0.5rem;
   background-color: #eee;
   border: none;
+  min-width: 200px !important;
+  max-width: 200px !important;
+}
+
+.address-details-select {
+  outline: none;
+  padding: 0.5rem;
+  background-color: #eee;
+  border: none;
+  min-width: 200px !important;
+  max-width: 200px !important;
 }
 
 .address-details-div {
@@ -603,4 +614,8 @@ input:focus {
   right: 0;
   bottom: 100px;
   transform: translate(-50%, 0);
+}
+
+.active-filter {
+  background-color: #999;
 }

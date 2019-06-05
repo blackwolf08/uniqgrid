@@ -18,7 +18,7 @@ export const fetchConnetionInfo = id => dispatch => {
         const properties = res.data.properties;
         const vid = res.data.vid;
         let arrayOfStrings = [];
-        //console.log("from action");
+        console.log(properties);
         Object.keys(properties).forEach(key => {
           arrayOfStrings.push(key);
         });

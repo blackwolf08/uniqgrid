@@ -162,8 +162,6 @@ class ConnectionInfo extends Component {
   handleChildrenChange = value => {
     
     Object.keys(value).forEach(key => {
-      console.log("key", key)
-      console.log(this.props.rawdatamapping)
       Object.keys(this.props.rawdatamapping).forEach(key2 => {
         console.log(key2)
         let regex = new RegExp("^" + key, "i");

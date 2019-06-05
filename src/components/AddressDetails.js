@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchConnetionInfo } from "../actions/fetchConnectionInfo";
 import Spinner from "../images";
-import csc from 'country-state-city';
-import uuid from 'uuid'
+import csc from "country-state-city";
+import uuid from "uuid";
 
 class AddressDetails extends Component {
   state = {
@@ -13,8 +13,15 @@ class AddressDetails extends Component {
     state: "-",
     street: "-",
     isLoading: true,
-    name: ""
+    name: "",
+    stateId: 0,
+    cityReady: false
   };
+
+  constructor() {
+    super();
+    this.selectRef = React.createRef();
+  }
 
   componentDidMount() {
     this.setState({
@@ -59,9 +66,37 @@ class AddressDetails extends Component {
     this.setState({
       isLoading: false
     });
+    const listOfStates = csc.getStatesOfCountry("101");
+    let idd;
+
+    setTimeout(()=>{
+      listOfStates.forEach(stateI => {
+        if (stateI.name === this.state.state) {
+          idd = stateI.id;
+        }
+      });
+      this.setState({
+        stateId: idd
+      })
+    },100)
   }
 
-  handleChange = e => {
+  handleSelectChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
+    const stateId = e.target.options[e.target.selectedIndex].id;
+    this.setState({
+      stateId
+    });
+    this.setState({
+      cityReady: true
+    });
+  };
+  handleSelectChangeCity = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -74,15 +109,26 @@ class AddressDetails extends Component {
     if (this.state.isLoading) {
       return <Spinner />;
     }
-    const listToRender = []
-    const listOfStates = csc.getStatesOfCountry("101")
-    //console.log(listOfStates)
-    listOfStates.forEach(stateName=>{
-      //console.log(stateName.name)
-       listToRender.push(<option key={uuid.v4()}>{stateName.name}</option>)
-    })
+    const listOfStatesToRender = [];
+    const listOfCitiesToRender = [];
+    const listOfStates = csc.getStatesOfCountry("101");
+    listOfStates.forEach(stateName => {
+      listOfStatesToRender.push(
+        <option id={stateName.id} key={uuid.v4()}>
+          {stateName.name}
+        </option>
+      );
+    });
 
-
+    const listOfCities = csc.getCitiesOfState(`${this.state.stateId}`);
+    listOfCities.forEach(cityName => {
+      listOfCitiesToRender.push(
+        <option id={cityName.id} key={uuid.v4()}>
+          {cityName.name}
+        </option>
+      );
+    });
+    
     return (
       <div className="address-details">
         {!this.state.isLoading && (
@@ -102,33 +148,28 @@ class AddressDetails extends Component {
             </div>
             <div className="address-details-div ">
               <p>City</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.city}
-                placeholder={this.state.city}
-                onChange={e => {
-                  this.handleChange(e);
-                }}
+              <select
+                className="address-details-select "
                 name="city"
-              />{" "}
-              
+                onChange={this.handleSelectChangeCity}
+                placeholder={this.state.city}
+                value={this.state.city}
+              >
+                {listOfCitiesToRender}
+              </select>
             </div>
             <div className="address-details-div ">
               <p>State</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.state}
-                placeholder={this.state.state}
-                onChange={e => {
-                  this.handleChange(e);
-                }}
+              <select
+                className="address-details-select "
                 name="state"
-              />{" "}
-              {/* <select>
-                {listToRender}
-              </select> */}
+                onChange={this.handleSelectChange}
+                ref={this.selectRef}
+                placeholder={this.state.state}
+                value={this.state.state}
+              >
+                {listOfStatesToRender}
+              </select>
             </div>
             <div className="address-details-div ">
               <p>Pincode</p>

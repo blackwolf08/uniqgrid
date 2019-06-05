@@ -52,7 +52,8 @@ class ConnectionDetails extends Component {
     });
   }
 
-  handleChange = e => {
+
+  handleSelectChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -90,25 +91,27 @@ class ConnectionDetails extends Component {
             </div>
             <div className="address-details-div ">
               <p>Segment</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.segment}
+              <select
+                className="address-details-select "
+                name="state"
+                onChange={this.handleSelectChange}
                 placeholder={this.state.segment}
-                onChange={this.handleChange}
-                name="segment"
-              />{" "}
+                value={this.state.segment}
+              >
+                <option>{this.state.segment}</option>
+              </select>
             </div>
             <div className="address-details-div ">
               <p>Sub Segment</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.sub_segment}
+              <select
+                className="address-details-select "
+                name="state"
+                onChange={this.handleSelectChange}
                 placeholder={this.state.sub_segment}
-                onChange={this.handleChange}
-                name="sub_segment"
-              />{" "}
+                value={this.state.sub_segment}
+              >
+                <option>{this.state.sub_segment}</option>
+              </select>
             </div>
             <div className="address-details-div ">
               <p>Average Monthly Cost</p>
@@ -123,14 +126,15 @@ class ConnectionDetails extends Component {
             </div>
             <div className="address-details-div ">
               <p>Electricity Quality</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.electricity_quality}
+              <select
+                className="address-details-select "
+                name="state"
+                onChange={this.handleSelectChange}
                 placeholder={this.state.electricity_quality}
-                onChange={this.handleChange}
-                name="electricity_quality"
-              />{" "}
+                value={this.state.electricity_quality}
+              >
+                <option>{this.state.electricity_quality}</option>
+              </select>
             </div>
           </>
         )}

@@ -40,7 +40,7 @@ export default class LocalGeneration extends Component {
     });
   }
 
-  handleChange = e => {
+  handleSelectChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -55,15 +55,17 @@ export default class LocalGeneration extends Component {
         {!this.state.isLoading && (
           <>
             <div className="address-details-div">
-              <p>Diesel Genset Operational</p>
-              <input
-                className="address-details-input "
-                type="text"
-                value={this.state.dieselGensetOp}
-                placeholder={this.state.dieselGensetOp}
-                onChange={this.handleChange}
-                name="dieselGensetOp"
-              />{" "}
+              <p>Diesel Genset Operational?</p>
+              <select
+                className="address-details-select "
+                name="state"
+                onChange={this.handleSelectChange}
+                placeholder={this.state.sub_segment}
+                value={this.state.sub_segment}
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </select>
             </div>
             <div className="address-details-div ">
               <p>Number of Diesel Genset(s)?</p>
