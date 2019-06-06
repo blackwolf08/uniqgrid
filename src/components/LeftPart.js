@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class LeftPart extends Component {
+class LeftPart extends Component {
   state = {
     mysite: "leftpart-menu",
     mydevice: "leftpart-menu",
@@ -36,11 +37,19 @@ export default class LeftPart extends Component {
       });
     }
   }
+
   render() {
+    let shortName = "";
+    if (typeof this.props.data !== "undefined") {
+      let nameArr = this.props.data.name.split(" ");
+      nameArr.forEach(e => {
+        shortName += e[0].toUpperCase();
+      });
+    }
     return (
       <div className="left-part flex flex-col">
         <div className="circle">
-          <p>UD</p>
+          <p>{shortName}</p>
         </div>
         <button className={this.state.mysite}>
           <Link
@@ -91,3 +100,9 @@ export default class LeftPart extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  data: state.userdata.customerInfo.data
+});
+
+export default connect(mapStateToProps)(LeftPart);

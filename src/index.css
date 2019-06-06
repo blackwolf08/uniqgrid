@@ -616,6 +616,15 @@ input:focus {
   transform: translate(-50%, 0);
 }
 
+.circle-myprofile {
+  background-color: #67809f;
+  margin-left: calc(100% - 50%);
+  transform: translate(-50%, 0);
+}
+.circle-myprofile p {
+  color: white;
+}
+
 .active-filter {
   background-color: #999;
 }
