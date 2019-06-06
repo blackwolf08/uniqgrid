@@ -69,7 +69,7 @@ class AddressDetails extends Component {
     const listOfStates = csc.getStatesOfCountry("101");
     let idd;
 
-    setTimeout(()=>{
+    setTimeout(() => {
       listOfStates.forEach(stateI => {
         if (stateI.name === this.state.state) {
           idd = stateI.id;
@@ -77,9 +77,18 @@ class AddressDetails extends Component {
       });
       this.setState({
         stateId: idd
-      })
-    },100)
+      });
+    }, 100);
   }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
+  };
 
   handleSelectChange = e => {
     this.setState({
@@ -128,7 +137,7 @@ class AddressDetails extends Component {
         </option>
       );
     });
-    
+
     return (
       <div className="address-details">
         {!this.state.isLoading && (

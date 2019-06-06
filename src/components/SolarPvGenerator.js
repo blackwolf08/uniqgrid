@@ -2,25 +2,24 @@ import React, { Component } from "react";
 
 export default class SolarPvGenerator extends Component {
   state = {
-    adoptedSolarSite: "-",
+    adopted_solar: "-",
     interested: true,
     total_capacity_kwp: "",
     solar_generator_operational_since: "",
     solar_panel_oem: "",
     solar_inverter_oem: "",
-    solar_installer: ""
+    solar_installer: "",
+    annual_maintenance: "Yes"
   };
 
   componentDidMount() {
     this.setState({
       isLoading: true
     });
-    console.log(this.props.data);
-
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("adopted") === 0) {
         this.setState({
-          adoptedSolarSite: this.props.data[key].value.toString()
+          adopted_solar: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("not") > -1) {
@@ -35,7 +34,9 @@ export default class SolarPvGenerator extends Component {
       }
       if (key.indexOf("operational") > -1) {
         this.setState({
-          solar_generator_operational_since: this.props.data[key].value.toString()
+          solar_generator_operational_since: this.props.data[
+            key
+          ].value.toString()
         });
       }
       if (key.indexOf("panel") > -1) {
@@ -57,13 +58,16 @@ export default class SolarPvGenerator extends Component {
     this.setState({
       isLoading: false
     });
-    const list = this.state.adoptedSolarSite.split(" ");
+    const list = this.state.adopted_solar.split(" ");
     if (list[0] === "Yes" || list[0] === "yes") {
       this.setState({
         showInstalled: true
       });
+    } else {
+      this.setState({
+        showInstalled: false
+      });
     }
-    console.log(this.state);
   }
 
   handleChange = e => {
@@ -94,7 +98,7 @@ export default class SolarPvGenerator extends Component {
         <p>
           Adopted Solar{" "}
           <span className="solar-pv-generator-heading">
-            {this.state.adoptedSolarSite}
+            {this.state.adopted_solar}
           </span>
         </p>
         {this.state.showInstalled && (
@@ -123,7 +127,6 @@ export default class SolarPvGenerator extends Component {
                 className="address-details-input "
                 type="text"
                 value={this.state.total_capacity_kwp}
-                placeholder={this.state.total_capacity_kwp}
                 onChange={this.handleChange}
                 name="total_capacity_kwp"
               />
@@ -134,7 +137,6 @@ export default class SolarPvGenerator extends Component {
                 className="address-details-input "
                 type="text"
                 value={this.state.solar_generator_operational_since}
-                placeholder={this.state.solar_generator_operational_since}
                 onChange={this.handleChange}
                 name="solar_generator_operational_since"
               />
@@ -145,7 +147,6 @@ export default class SolarPvGenerator extends Component {
                 className="address-details-input "
                 type="text"
                 value={this.state.solar_panel_oem}
-                placeholder={this.state.solar_panel_oem}
                 onChange={this.handleChange}
                 name="solar_panel_oem"
               />
@@ -156,7 +157,6 @@ export default class SolarPvGenerator extends Component {
                 className="address-details-input "
                 type="text"
                 value={this.state.solar_inverter_oem}
-                placeholder={this.state.solar_inverter_oem}
                 onChange={this.handleChange}
                 name="solar_inverter_oem"
               />
@@ -167,19 +167,19 @@ export default class SolarPvGenerator extends Component {
                 className="address-details-input "
                 type="text"
                 value={this.state.solar_installer}
-                placeholder={this.state.solar_installer}
                 onChange={this.handleChange}
                 name="solar_installer"
               />
             </div>
             <div className="address-details-div ">
+              {/* NO value from server, has to be editied before production build */}
               <p>Annual Maintenance</p>
               <select
                 className="address-details-select "
-                name="state"
+                name="annual_maintenance"
                 onChange={this.handleSelectChange}
                 placeholder="Yes"
-                value="Yes"
+                value={this.state.annual_maintenance}
               >
                 <option>Yes</option>
                 <option>No</option>

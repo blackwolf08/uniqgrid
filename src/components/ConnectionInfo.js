@@ -32,7 +32,7 @@ class ConnectionInfo extends Component {
     average_monthly_energy_cost: "",
     electricity_quality: "",
     bodyArray: [],
-    finalArray: [],
+    finalArray: []
   };
 
   componentDidMount() {
@@ -151,7 +151,7 @@ class ConnectionInfo extends Component {
         }
       )
         .then(function(res) {
-         window.location.reload();
+          window.location.reload();
         })
         .catch(function(res) {
           console.log(res);
@@ -160,14 +160,12 @@ class ConnectionInfo extends Component {
   };
 
   handleChildrenChange = value => {
-    
     Object.keys(value).forEach(key => {
       Object.keys(this.props.rawdatamapping).forEach(key2 => {
-        console.log(key2)
         let regex = new RegExp("^" + key, "i");
         if (key2.match(regex)) {
           let objToBePushed = { [key2]: value[key] };
-          console.log(objToBePushed)
+          console.log(objToBePushed);
           this.setState({
             bodyArray: [...this.state.bodyArray, objToBePushed]
           });

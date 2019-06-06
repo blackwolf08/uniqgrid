@@ -51,7 +51,14 @@ class ConnectionDetails extends Component {
       isLoading: false
     });
   }
-
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
+  };
 
   handleSelectChange = e => {
     this.setState({
@@ -93,24 +100,49 @@ class ConnectionDetails extends Component {
               <p>Segment</p>
               <select
                 className="address-details-select "
-                name="state"
+                name="segment"
                 onChange={this.handleSelectChange}
                 placeholder={this.state.segment}
                 value={this.state.segment}
               >
-                <option>{this.state.segment}</option>
+                <option>Industrial</option>
+                <option>Institutional</option>
+                <option>Commercial</option>
+                <option>Residential</option>
+                <option>Others</option>
               </select>
             </div>
             <div className="address-details-div ">
               <p>Sub Segment</p>
               <select
                 className="address-details-select "
-                name="state"
+                name="sub_segment"
                 onChange={this.handleSelectChange}
                 placeholder={this.state.sub_segment}
                 value={this.state.sub_segment}
               >
-                <option>{this.state.sub_segment}</option>
+                <option>Pre-School</option>
+                <option>School</option>
+                <option>Diploma/ITI</option>
+                <option>College</option>
+                <option>University</option>
+                <option>Restaurant</option>
+                <option>Mall</option>
+                <option>Hotel</option>
+                <option>Commercial Complex</option>
+                <option>Petrol Pump</option>
+                <option>PG and Hostel</option>
+                <option>Multi-Storey Apartment</option>
+                <option>Independent House</option>
+                <option>Residential Society</option>
+                <option>Township</option>
+                <option>Manufacturing</option>
+                <option>Food and Beverages</option>
+                <option>Retail</option>
+                <option>Cold Storage</option>
+                <option>Warehouse</option>
+                <option>Logistics</option>
+                <option>Others</option>
               </select>
             </div>
             <div className="address-details-div ">
@@ -128,12 +160,15 @@ class ConnectionDetails extends Component {
               <p>Electricity Quality</p>
               <select
                 className="address-details-select "
-                name="state"
+                name="electricity_quality"
                 onChange={this.handleSelectChange}
                 placeholder={this.state.electricity_quality}
                 value={this.state.electricity_quality}
               >
-                <option>{this.state.electricity_quality}</option>
+                <option>Poor</option>
+                <option>Average</option>
+                <option>Good</option>
+                <option>Excellent</option>
               </select>
             </div>
           </>

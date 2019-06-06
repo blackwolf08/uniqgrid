@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
+import { connect } from "react-redux";
 
-export default class FeedBack extends Component {
+class FeedBack extends Component {
   state = {
     onestar: "fas fa-star",
     twostar: "fas fa-star",
@@ -83,11 +84,28 @@ export default class FeedBack extends Component {
   };
 
   handleSubmit = () => {
-    this.setState({
-      isSubmitted: !this.state.isSubmitted
-    });
-
     //handle API calls here for feedback backend, then set state to static and dont allow for another rating!!
+    fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/vid/${
+        this.props.vid
+      }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`,
+      {
+        method: "POST",
+        body: `{  "properties": [    
+          {      "property": "feedback",
+            "value": ${JSON.stringify(this.state.numberOfStars)}
+          } 
+     ]}`
+      }
+    )
+      .then(() => {
+        this.setState({
+          isSubmitted: !this.state.isSubmitted
+        });
+      })
+      .catch(function(res) {
+        console.log(res);
+      });
   };
 
   render() {
@@ -157,3 +175,9 @@ export default class FeedBack extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  vid: state.userdata.vid
+});
+
+export default connect(mapStateToProps)(FeedBack);

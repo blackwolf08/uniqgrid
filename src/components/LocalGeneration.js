@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 export default class LocalGeneration extends Component {
   state = {
-    dieselGensetOp: "",
-    noOfDieselGensets: "",
-    totalCapGensets: "",
-    monthlyRunningCost: ""
+    diesel_genset_operational: "",
+    number_of_diesel_gensets: "",
+    total_kva_capacity_of_diesel_gensets: "",
+    monthly_energy_cost: ""
   };
 
   componentDidMount() {
@@ -16,22 +16,24 @@ export default class LocalGeneration extends Component {
     Object.keys(this.props.data).forEach(key => {
       if (key.indexOf("genset") === 7) {
         this.setState({
-          dieselGensetOp: this.props.data[key].value.toString()
+          diesel_genset_operational: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("number") === 0) {
         this.setState({
-          noOfDieselGensets: this.props.data[key].value.toString()
+          number_of_diesel_gensets: this.props.data[key].value.toString()
         });
       }
       if (key.indexOf("total") === 0) {
         this.setState({
-          totalCapGensets: this.props.data[key].value.toString()
+          total_kva_capacity_of_diesel_gensets: this.props.data[
+            key
+          ].value.toString()
         });
       }
       if (key.indexOf("monthly") === 0) {
         this.setState({
-          monthlyRunningCost: this.props.data[key].value.toString()
+          monthly_energy_cost: this.props.data[key].value.toString()
         });
       }
     });
@@ -41,6 +43,14 @@ export default class LocalGeneration extends Component {
   }
 
   handleSelectChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.props.handleChildrenChange({
+      [e.target.name]: e.target.value
+    });
+  };
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -58,10 +68,10 @@ export default class LocalGeneration extends Component {
               <p>Diesel Genset Operational?</p>
               <select
                 className="address-details-select "
-                name="state"
+                name="diesel_genset_operational"
                 onChange={this.handleSelectChange}
-                placeholder={this.state.sub_segment}
-                value={this.state.sub_segment}
+                placeholder={this.state.diesel_genset_operational}
+                value={this.state.diesel_genset_operational}
               >
                 <option>Yes</option>
                 <option>No</option>
@@ -72,10 +82,10 @@ export default class LocalGeneration extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.noOfDieselGensets}
-                placeholder={this.state.noOfDieselGensets}
+                value={this.state.number_of_diesel_gensets}
+                placeholder={this.state.number_of_diesel_gensets}
                 onChange={this.handleChange}
-                name="noOfDieselGensets"
+                name="number_of_diesel_gensets"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -83,10 +93,10 @@ export default class LocalGeneration extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.totalCapGensets}
-                placeholder={this.state.totalCapGensets}
+                value={this.state.total_kva_capacity_of_diesel_gensets}
+                placeholder={this.state.total_kva_capacity_of_diesel_gensets}
                 onChange={this.handleChange}
-                name="totalCapGensets"
+                name="total_kva_capacity_of_diesel_gensets"
               />{" "}
             </div>
             <div className="address-details-div ">
@@ -94,10 +104,10 @@ export default class LocalGeneration extends Component {
               <input
                 className="address-details-input "
                 type="text"
-                value={this.state.monthlyRunningCost}
-                placeholder={this.state.monthlyRunningCost}
+                value={this.state.monthly_energy_cost}
+                placeholder={this.state.monthly_energy_cost}
                 onChange={this.handleChange}
-                name="monthlyRunningCost"
+                name="monthly_energy_cost"
               />{" "}
             </div>
           </>
