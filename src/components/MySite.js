@@ -16,69 +16,68 @@ export default class MySite extends Component {
   };
 
   componentWillMount() {
-    if(typeof localStorage.jwtToken !== "undefined")
-    {
-    let jwt = localStorage.jwtToken;
-    jwt = jwtDecode(jwt);
-    const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/${
-      jwt.sub
-    }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`;
+    if (typeof localStorage.jwtToken !== "undefined") {
+      let jwt = localStorage.jwtToken;
+      jwt = jwtDecode(jwt);
+      const URL = `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/API KEY HERE/${
+        jwt.sub
+      }/profile?API KEY HERE`;
 
-    axios.get(URL).then(res => {
-      const properties = res.data.properties;
-      let arrayOfStrings = [];
-      let noOfSites = [];
-      Object.keys(properties).forEach(key => {
-        arrayOfStrings.push(key);
-      });
+      axios.get(URL).then(res => {
+        const properties = res.data.properties;
+        let arrayOfStrings = [];
+        let noOfSites = [];
+        Object.keys(properties).forEach(key => {
+          arrayOfStrings.push(key);
+        });
 
-      arrayOfStrings.forEach(site => {
-        let nanCheck = isNaN(parseInt(site.charAt(site.length - 2), 10));
-        if (site.search("site") >= 0 && !nanCheck) {
-          noOfSites.push(parseInt(site.charAt(site.length - 2), 10));
+        arrayOfStrings.forEach(site => {
+          let nanCheck = isNaN(parseInt(site.charAt(site.length - 2), 10));
+          if (site.search("site") >= 0 && !nanCheck) {
+            noOfSites.push(parseInt(site.charAt(site.length - 2), 10));
+          }
+        });
+        let nameOfSites = [];
+        arrayOfStrings.sort();
+        arrayOfStrings.forEach(site => {
+          if (site.search("electricity_connection_name") >= 0) {
+            nameOfSites.push(res.data.properties[site].value);
+          }
+        });
+        this.setState({
+          nameOfSites: nameOfSites
+        });
+
+        if (noOfSites.length === 0) {
+          noOfSites.push(1);
         }
-      });
-      let nameOfSites = [];
-      arrayOfStrings.sort();
-      arrayOfStrings.forEach(site => {
-        if (site.search("electricity_connection_name") >= 0) {
-          nameOfSites.push(res.data.properties[site].value);
-        }
+
+        arrayOfStrings.sort();
+        this.setState({
+          properties
+        });
+
+        let kWASite = [];
+        arrayOfStrings.forEach(site => {
+          if (site.search("connected_load_kw_site") >= 0) {
+            kWASite.push(site);
+          } else if (site.search("connected_load_kw") >= 0) {
+            kWASite.push(site);
+          }
+        });
+        this.setState({
+          kWASite
+        });
+
+        noOfSites.sort();
+        this.setState({
+          maxConnections: noOfSites[noOfSites.length - 1]
+        });
       });
       this.setState({
-        nameOfSites: nameOfSites
+        ready: true
       });
-
-      if (noOfSites.length === 0) {
-        noOfSites.push(1);
-      }
-
-      arrayOfStrings.sort();
-      this.setState({
-        properties
-      });
-
-      let kWASite = [];
-      arrayOfStrings.forEach(site => {
-        if (site.search("connected_load_kw_site") >= 0) {
-          kWASite.push(site);
-        } else if (site.search("connected_load_kw") >= 0) {
-          kWASite.push(site);
-        }
-      });
-      this.setState({
-        kWASite
-      });
-
-      noOfSites.sort();
-      this.setState({
-        maxConnections: noOfSites[noOfSites.length - 1]
-      });
-    });
-    this.setState({
-      ready: true
-    });
-  }
+    }
   }
 
   render() {

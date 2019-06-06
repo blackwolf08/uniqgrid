@@ -36,11 +36,11 @@ class MyDevice extends Component {
       deviceActivated: true,
       deviceName: name
     });
-    const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/device/${deviceId}`;
+    const URL = `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/API KEY HERE`;
     axios.get(URL).then(res => {
       axios
         .get(
-          `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${deviceId}/keys/timeseries`
+          `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/API KEY HERE/${deviceId}/API KEY HERE`
         )
         .then(res => {
           this.setState({
@@ -60,11 +60,9 @@ class MyDevice extends Component {
     let startTime = Date.now() - 604800000;
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/API KEY HERE/${
           this.state.deviceId
-        }/values/timeseries?limit=100&agg=NONE&keys=${
-          e.target.value
-        }&startTs=${startTime}&endTs=${endtime}`
+        }/API KEY HERE${e.target.value}&startTs=${startTime}&endTs=${endtime}`
       )
       .then(res => {
         let a = res.data;
@@ -116,11 +114,11 @@ class MyDevice extends Component {
     let endtime = Date.now();
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/api/plugins/telemetry/DEVICE/${
+        `https://cors-anywhere.herokuapp.com/http://portal.uniqgridcloud.com:8080/API KEY HERE/${
           this.state.deviceId
-        }/values/timeseries?limit=100&agg=NONE&keys=${
+        }/API KEY HERE{
           this.state.selectValue
-        }&startTs=${startTime}&endTs=${endtime}`
+        }&API KEY HERE=${startTime}&endTs=${endtime}`
       )
       .then(res => {
         let a = res.data;

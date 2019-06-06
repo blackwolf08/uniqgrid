@@ -143,7 +143,7 @@ class ConnectionInfo extends Component {
       fetch(
         `https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/vid/${
           this.props.vid
-        }/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b`,
+        }/profile?hapikey=API KEY HERE`,
         {
           method: "POST",
           body: `{  "properties": ${JSON.stringify(toSend)}

@@ -4,7 +4,7 @@ import axios from "axios";
 export default class Check extends Component {
   render() {
     const URL =
-      "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/contacts/v1/contact/email/demo@uniqgrid.com/profile?hapikey=bdcec428-e806-47ec-b7fd-ece8b03a870b";
+      "https://cors-anywhere.herokuapp.com/https://api.hubapi.com/cAPI KEY HERE";
 
     axios.get(URL).then(res => {
       const properties = res.data.properties;
